@@ -3,7 +3,7 @@ AirBnB API clone using express
 
 ## Database Schema Design
 
-`<insert database schema design here>`
+![AirBnB API table](https://user-images.githubusercontent.com/109828290/202571020-fbfb30c8-358d-4a21-a6f7-6947fb8450b1.png)
 
 ## API Documentation
 

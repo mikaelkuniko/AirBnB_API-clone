@@ -1,5 +1,7 @@
 # Phase 4: User Auth Routes
 
+!!! ON THIS STAGE
+
 It's finally time to create the authentication API routes!
 
 In this section, you will add the following routes to your Express application:
@@ -139,6 +141,7 @@ module.exports = router;
 
 ### Test the Login Route
 
+
 Test the login route by navigating to the [http://localhost:8000/api/csrf/restore]
 route and making a fetch request from the browser's DevTools console.
 Remember, you need to pass in the value of the `XSRF-TOKEN` cookie as a header
@@ -205,6 +208,7 @@ Here's a recommendation for what to write as your commit message:
 
 ## Merge your feature branch into your dev branch
 
+
 Once you thoroughly test that your `login` feature branch is working,
 merge the branch into the `dev` branch.
 
@@ -235,6 +239,8 @@ git push origin dev
 ```
 
 ## Logout Git Feature Branch
+
+!!!
 
 Checkout the `dev` branch and make a new feature branch called `logout` from the
 `dev` branch.
@@ -336,6 +342,8 @@ git push origin dev
 ```
 
 ## Signup Git Feature Branch
+
+!!!
 
 Checkout the `dev` branch and make a new feature branch called `signup` from the
 `dev` branch.
@@ -493,6 +501,8 @@ You will be making commits for adding an endpoint to get the current user
 session to your backend server.
 
 ## Get Session User API Route
+
+!!! here now
 
 The `GET /api/session` get session user route will return the session user
 as JSON under the key of `user` . If there is not a session, it will return a

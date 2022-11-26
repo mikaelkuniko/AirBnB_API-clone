@@ -9,7 +9,6 @@ options.tableName = 'Spots'
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    options.tableName = 'Spots';
     return queryInterface.bulkInsert(options, [
       {
         ownerId: 1,

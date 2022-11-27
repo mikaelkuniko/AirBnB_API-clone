@@ -37,10 +37,16 @@ const validateLogin = [
         return next(err);
       }
 
-      await setTokenCookie(res, user);
+      let token = await setTokenCookie(res, user);
+
 
       return res.json({
-        user
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        username: user.username,
+        token: token
       });
     }
   );
@@ -59,13 +65,24 @@ const validateLogin = [
     restoreUser,
     (req, res) => {
       const { user } = req;
+      // console.log(user.dataValues)
       if (user) {
         return res.json({
-          user: user.toSafeObject()
+          // user: user.toSafeObject()
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          username: user.username
         });
       } else return res.json({});
     }
   );
+
+  // router.get('/', async (req,res,next) => {
+  //   let user = req;
+  //   console.log(user)
+  // })
 
 
 

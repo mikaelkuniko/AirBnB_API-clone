@@ -64,15 +64,15 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(
         models.Booking, {
           foreignKey: 'userId',
-          otherKey: 'spotId',
+          // otherKey: 'spotId',
           onDelete: 'CASCADE',
           hooks: true
         }
       )
       User.hasMany(
         models.Review, {
-          foreignKey: 'userId',
-          otherKey: 'spotId'
+          foreignKey: 'userId'
+          // otherKey: 'spotId'
         }
       )
     }

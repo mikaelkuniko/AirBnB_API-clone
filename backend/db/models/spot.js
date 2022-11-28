@@ -10,55 +10,83 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Spot.belongsToMany(
+        models.User,
+        {through : models.Booking}
+      );
+      Spot.belongsToMany(
+        models.User,
+        {through : models.Review}
+      );
       Spot.belongsTo(
-        models.User, {
-          foreignKey: 'ownerId',
+        models.User,
+        {
+          foreignKey: 'ownerId'
+        }
+      );
+      Spot.hasMany(
+        models.Booking, {
+          foreignKey: 'spotId',
+          // otherKey: 'userId',
           onDelete: 'CASCADE',
           hooks: true
+        }
+      );
+      Spot.hasMany(
+        models.Review, {
+          foreignKey: 'spotId',
+          // otherKey: 'userId',
+          onDelete: 'CASCADE',
+          hooks: true
+        }
+      );
+      Spot.hasMany(
+        models.SpotImage,
+        {
+          foreignKey: 'spotId'
         }
       )
     }
   }
   Spot.init({
     ownerId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+     type: DataTypes.INTEGER,
+     allowNull : false
     },
     address: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull : false
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull : false
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull : false
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull : false
     },
     lat: {
       type: DataTypes.FLOAT,
-      allowNull: false
+      allowNull : false
     },
     lng: {
       type: DataTypes.FLOAT,
-      allowNull: false
+      allowNull : false
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull : false
     },
     description: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     },
     price: {
       type: DataTypes.FLOAT,
-      allowNull: false
+      allowNull : false
     }
   }, {
     sequelize,

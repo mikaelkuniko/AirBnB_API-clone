@@ -604,12 +604,8 @@ router.get('/:spotId/bookings', requireAuth, async(req,res,next)=>{
     ownedSpots.forEach(spot => {
         ownedSpotIds.push(spot.dataValues.id)
     })
-    let bookings = await Booking.findAll({
-        where: {
-            spotId: spotId
-        }
-    })
-    if(!bookings){
+    let validSpot = await Spot.findByPk(spotId)
+    if(!validSpot){
         res.status(404);
         return res.json({
             "message": "Spot couldn't be found",

@@ -199,6 +199,35 @@ router.get('/current', requireAuth, async (req,res,next)=>{
 
 })
 
+//add spotimage to spot id
+router.post('/:spotId/images', requireAuth, async(req,res,next)=> {
+
+    let {user} = req;
+    let spotId = req.params.spotId;
+    let {url, preview} = req.body
+
+    let validSpot = await Spot.findOne({
+        where: {
+            id: spotId,
+            ownerId: user.id
+        }
+    })
+    if(!validSpot){
+        res.status(404)
+        return res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    } else {
+    let newSpotImage = await SpotImage.create({
+        spotId: spotId,
+        url,
+        preview
+    })
+    return res.json(newSpotImage)
+    }
+
+})
 
 
 

@@ -31,7 +31,42 @@ router.get("/current", requireAuth, async(req,res,next)=>{
     return res.json(allReviews);
 });
 
+//add an image to a review based off reviewid
+// running into interger error?
+router.post('/:reviewId/images', requireAuth, async(req,res,next)=> {
+    let {user} = req;
+    let reviewId = req.params.reviewId;
+    let {url} = req.body
 
+    let validReview = await Review.findByPk(reviewId);
+    if(!validReview){
+        res.status(404);
+        res.json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
+          })
+    }
+    let count = await Review.count({
+        where: {
+            id: reviewId
+        }
+    });
+    console.log('this is count', count);
+    if(count > 10){
+        res.status(403);
+        return res.json({
+            "message": "Maximum number of images for this resource was reached",
+            "statusCode": 403
+          })
+    } else {
+        let newReviewImage = await ReviewImage.create({
+            reviewId,
+            url
+        })
+        res.status(200);
+        res.json(newReviewImage)
+    }
+})
 
 
 

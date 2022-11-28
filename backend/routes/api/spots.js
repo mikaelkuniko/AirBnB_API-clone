@@ -4,7 +4,7 @@ const router = express.Router();
 const sequelize = require('sequelize')
 
 const { requireAuth } = require('../../utils/auth');
-const { Spot, Review, SpotImage } = require('../../db/models');
+const { User, Spot, Review, SpotImage } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -100,9 +100,9 @@ router.get('/', async(req, res, next)=> {
         } else {
             allSpot.avgRating = "No current ratings"
         }
-        if(element.SpotImages){
-            allSpot.previewImage = element.SpotImage
-        } else if(!element.SpotImages){
+        if(element.SpotImages[0].dataValues.url){
+            allSpot.previewImage = element.SpotImages[0].dataValues.url
+        } else {
             allSpot.previewImage = "No current image listed"
         }
         console.log(allSpot);
@@ -138,6 +138,74 @@ router.post('/', requireAuth, validateSpots, async(req,res,next)=> {
     })
 
     return res.json(newSpot)
+})
+
+//add spotimage to spot id
+router.post('/:spotId/images', requireAuth, async(req,res,next)=> {
+
+    let {user} = req;
+    let spotId = req.params.spotId;
+    let {url, preview} = req.body
+
+    let validSpot = await Spot.findOne({
+        where: {
+            id: spotId,
+            ownerId: user.id
+        }
+    })
+    if(!validSpot){
+        res.status(404)
+        return res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    } else {
+    let newSpotImage = await SpotImage.create({
+        spotId: spotId,
+        url,
+        preview
+    })
+    return res.json(newSpotImage)
+    }
+
+});
+
+//get spot by spotId
+
+router.get('/:spotId', async(req,res,next) =>{
+    let spotId = req.params.spotId;
+    let foundSpot = await Spot.findByPk(spotId);
+    if(!foundSpot){
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    } else {
+        let count = await Review.count({
+            where: {
+                spotId: req.params.spotId
+            }
+        })
+        let foundJSON = foundSpot.toJSON()
+        foundJSON.numReviews = count;
+        let sum = await Review.sum('stars', {
+            where: {
+                spotId: req.params.spotId
+            }
+        });
+        foundJSON.avgStarRating = (sum/count)
+        foundJSON.SpotImages = await SpotImage.findAll({
+            where: {
+                spotId: req.params.spotId
+            }
+        });
+        foundJSON.Owner = await User.findByPk(foundJSON.ownerId, {
+            attributes: ["id", "firstName", "lastName"]
+        })
+        res.status(200);
+        return res.json(foundJSON);
+    }
 })
 
 // get spot by current user
@@ -196,36 +264,6 @@ router.get('/current', requireAuth, async (req,res,next)=>{
         }
     })
 
-
-})
-
-//add spotimage to spot id
-router.post('/:spotId/images', requireAuth, async(req,res,next)=> {
-
-    let {user} = req;
-    let spotId = req.params.spotId;
-    let {url, preview} = req.body
-
-    let validSpot = await Spot.findOne({
-        where: {
-            id: spotId,
-            ownerId: user.id
-        }
-    })
-    if(!validSpot){
-        res.status(404)
-        return res.json({
-            message: "Spot couldn't be found",
-            statusCode: 404
-        })
-    } else {
-    let newSpotImage = await SpotImage.create({
-        spotId: spotId,
-        url,
-        preview
-    })
-    return res.json(newSpotImage)
-    }
 
 })
 

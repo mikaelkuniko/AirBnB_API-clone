@@ -264,8 +264,68 @@ router.get('/current', requireAuth, async (req,res,next)=>{
         }
     })
 
-
 })
+
+
+// edit a spot
+router.put('/:spotId', requireAuth, async(req,res,next)=>{
+    const {address, city, state, country, lat, lng, name, description, price} = req.body;
+    const {user} = req;
+    let validateSpot = await Spot.findOne({
+        where: {
+            id: req.params.spotId,
+            ownerId: user.id
+        }
+    });
+    let spotExists = await Spot.findByPk(req.params.spotId);
+
+    if(!spotExists){
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+          })
+    }
+    if(!validateSpot){
+        res.status(403);
+        return res.json({
+            "message": "Forbidden",
+            "statusCode": 403
+          })
+    } else {
+        if(address){
+            validateSpot.address = address
+        }
+        if(city){
+            validateSpot.city = city
+        }
+        if(state){
+            validateSpot.state = state
+        }
+        if(country){
+            validateSpot.country = country
+        }
+        if(lat){
+            validateSpot.lat = lat
+        }
+        if(lng){
+            validateSpot.lng = lng
+        }
+        if(name){
+            validateSpot.name = name
+        }
+        if(description){
+            validateSpot.description = description
+        }
+        if(price){
+            validateSpot.price = price
+        }
+        await validateSpot.save();
+        res.status(200);
+        res.json(validateSpot);
+    }
+
+}, validateSpots);
 
 
 

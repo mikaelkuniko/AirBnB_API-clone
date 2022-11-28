@@ -23,9 +23,21 @@ const validateLogin = [
    // log in
    router.post(
     '/',
-    validateLogin,
+    // validateLogin,
     async (req, res, next) => {
       const { credential, password } = req.body;
+
+      if(!credential || !password){
+        res.status(400);
+        return res.json({
+          "message": "Validation error",
+          "statusCode": 400,
+          "errors": {
+            "credential": "Email or username is required",
+            "password": "Password is required"
+          }
+        })
+      }
 
       const user = await User.login({ credential, password });
 
@@ -48,7 +60,8 @@ const validateLogin = [
         username: user.username,
         token: token
       });
-    }
+    },
+    validateLogin
   );
 
   //log out

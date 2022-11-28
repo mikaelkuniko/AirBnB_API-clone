@@ -50,14 +50,16 @@ router.post(
       // console.log("this is username:", username)
       // console.log("true/false for users", !username)
 
-      if(!username || !email || !password){
+      if(!username || !email || !password || !firstName || !lastName){
         res.status(400);
         return res.json({
           "message": "Validation error",
           "statusCode": 400,
           "errors": {
-            "credential": "Email or username is required",
-            "password": "Password is required"
+            "email": "Invalid email",
+            "username": "Username is required",
+            "firstName": "First Name is required",
+            "lastName": "Last Name is required"
           }
         })
       }
@@ -106,7 +108,8 @@ router.post(
         username: user.username,
         token: token
       })
-    }, validateSignup
+    },
+    validateSignup
   );
 
   module.exports = router;

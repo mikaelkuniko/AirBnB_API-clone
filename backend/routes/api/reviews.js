@@ -17,22 +17,33 @@ router.get("/current", requireAuth, async(req,res,next)=>{
             userId: user.id
         },
         include: [{
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+        },{
             model: Spot,
-            attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country'],
+            attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
             include: [{
                 model: SpotImage,
                 attributes: ['url']
             }]
-        }, {
-            model: ReviewImage
-        }]
+        },
+        // {
+        //     model: ReviewImage,
+        //     attributes: ['id', 'url']
+        // }
+        //when uncommented results in validation error no field?
+    ]
     });
     res.status(200);
-    return res.json(allReviews);
+    return res.json({
+        Reviews: allReviews
+    });
 });
+
 
 //add an image to a review based off reviewid
 // running into interger error?
+// have not finished count > 10
 router.post('/:reviewId/images', requireAuth, async(req,res,next)=> {
     let {user} = req;
     let reviewId = req.params.reviewId;

@@ -588,4 +588,69 @@ router.post('/:spotId/bookings', requireAuth, async(req,res,next)=> {
 
 })
 
+//get bookings for a spot based of spotid
+router.get('/:spotId/bookings', requireAuth, async(req,res,next)=>{
+    const {user} = req;
+    const spotId = req.params.spotId;
+    let ownedSpots = await Spot.findAll({
+        where: {
+            ownerId: user.id
+        }
+    })
+
+    // console.log('This is owned spots', ownedSpots[0].dataValues.id);
+    let ownedSpotIds = [];
+
+    ownedSpots.forEach(spot => {
+        ownedSpotIds.push(spot.dataValues.id)
+    })
+    let bookings = await Booking.findAll({
+        where: {
+            spotId: spotId
+        }
+    })
+    if(!bookings){
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+          })
+    }
+    // console.log(ownedSpotIds);
+    // console.log("this is owned spot ids", ownedSpotIds);
+    // console.log("this is spotId", spotId)
+    // console.log("IS this true", ownedSpotIds.includes(spotId));
+    if(!ownedSpotIds.includes(spotId)){
+        let spotBookings = await Booking.findAll({
+            where: {
+                spotId: spotId
+            }
+        })
+        res.status(200);
+        return res.json({
+            Bookings: spotBookings
+        })
+    } else {
+        let ownedSpotBookings = await Booking.findAll({
+            where: {
+            spotId: spotId
+        },
+            include: [{
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+        }]
+    })
+    res.status(200);
+    return res.json({
+        Bookings: ownedSpotBookings
+        })
+    }
+    // console.log(spotBookings)
+
+    // res.json({
+    //     message: "hello"
+    // })
+
+})
+
 module.exports = router;

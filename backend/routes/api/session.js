@@ -1,7 +1,7 @@
 // backend/routes/api/session.js
 const express = require('express');
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
 const { check } = require('express-validator');
@@ -60,6 +60,18 @@ const validateLogin = [
     }
   );
 
+  router.get('/', requireAuth, async (req,res, next) => {
+    let {user} = req;
+    // console.log(user)
+    return res.json({
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      username: user.username
+    })
+  })
+
   router.get(
     '/',
     restoreUser,
@@ -78,14 +90,6 @@ const validateLogin = [
       } else return res.json({});
     }
   );
-
-  // router.get('/', async (req,res,next) => {
-  //   let user = req;
-  //   console.log(user)
-  // })
-
-
-
 
 
 

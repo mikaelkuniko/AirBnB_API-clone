@@ -79,14 +79,20 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull : false
+      allowNull : false,
+      validate: {
+        len: [1,50]
+      }
     },
     description: {
       type: DataTypes.STRING
     },
     price: {
       type: DataTypes.FLOAT,
-      allowNull : false
+      allowNull : false,
+      validate: {
+        min: 0
+      }
     }
   }, {
     sequelize,

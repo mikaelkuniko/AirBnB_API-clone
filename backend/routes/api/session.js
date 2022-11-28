@@ -80,12 +80,12 @@ const validateLogin = [
       // console.log(user.dataValues)
       if (user) {
         return res.json({
-          // user: user.toSafeObject()
-          id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          username: user.username
+          user: user.toSafeObject()
+          // id: user.id,
+          // firstName: user.firstName,
+          // lastName: user.lastName,
+          // email: user.email,
+          // username: user.username
         });
       } else return res.json({});
     }

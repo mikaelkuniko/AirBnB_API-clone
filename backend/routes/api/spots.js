@@ -71,6 +71,42 @@ const validateSpots = [
 
 //get all spots
 router.get('/', async(req, res, next)=> {
+
+    // query
+    let {page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice} = req.query;
+
+    page = parseInt(page);
+    size = parseInt(size);
+    // minLat = parseFloat(minLat);
+    // maxLat = parseFloat(maxLat);
+    // minLng = parseFloat(minLng);
+    // maxLng = parseFloat(maxLng);
+    // minPrice = parseFloat(minPrice);
+    // maxPrice = parseFloat(maxPrice);
+
+    if (page > 10 || page < 1 || size > 20 || size < 1 || minPrice < 1 || maxPrice < 1) {
+        res.status(400);
+        return res.json({
+            "message": "Validation Error",
+            "statusCode": 400,
+            "errors": {
+              "page": "Page must be greater than or equal to 1",
+              "size": "Size must be greater than or equal to 1",
+              "maxLat": "Maximum latitude is invalid",
+              "minLat": "Minimum latitude is invalid",
+              "minLng": "Maximum longitude is invalid",
+              "maxLng": "Minimum longitude is invalid",
+              "minPrice": "Maximum price must be greater than or equal to 0",
+              "maxPrice": "Minimum price must be greater than or equal to 0"
+            }
+          })
+    }
+    if (Number.isNaN(page) || page < 1 || page > 10) page = 1
+    if (Number.isNaN(size) || size < 1 || size > 20) size = 20
+    // console.log("this is size", size)
+
+    let pagination = {}
+
    let spots = await Spot.findAll({
         include: [{
             model: Review,
@@ -78,7 +114,9 @@ router.get('/', async(req, res, next)=> {
         }, {
             model: SpotImage,
             attributes: ['url']
-        }]
+        }],
+        limit: size,
+        offset: size * (page - 1)
     })
     let spotsArr = [];
     // console.log('This is spot', spots.length)
@@ -116,6 +154,8 @@ router.get('/', async(req, res, next)=> {
             updatedAt: element.updatedAt,
             // avgRating: avg,
             // previewImage: element.SpotImages[0].dataValues.url
+            limit: element.limit,
+            offset: element.offset
         }
         if(avg !== NaN) {
             allSpot.avgRating = avg
@@ -132,7 +172,9 @@ router.get('/', async(req, res, next)=> {
         // console.log("this is in the loop", spotsArr)
         if(element === spots[spots.length -1]){
             res.json({
-                Spots: spotsArr
+                Spots: spotsArr,
+                page,
+                size
             })
         }
     })

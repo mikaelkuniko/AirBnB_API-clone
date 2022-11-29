@@ -541,7 +541,8 @@ router.get('/:spotId/reviews', async(req,res,next)=> {
           })
     } else {
         res.status(200);
-        res.json(foundSpots)
+        res.json({
+            Reviews: foundSpots})
     }
 });
 
@@ -713,7 +714,8 @@ router.get('/:spotId/bookings', requireAuth, async(req,res,next)=>{
         let spotBookings = await Booking.findAll({
             where: {
                 spotId: spotId
-            }
+            },
+            attributes: ['spotId', 'startDate', 'endDate']
         })
         res.status(200);
         return res.json({

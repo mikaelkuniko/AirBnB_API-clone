@@ -41,5 +41,69 @@ router.get('/current', requireAuth, async(req,res,next)=> {
     });
 })
 
+//edit a booking
+router.put('/:bookingId', requireAuth, async(req,res,next)=> {
+    const {user} = req;
+    const {startDate, endDate} = req.body
+
+    let editBooking = await Booking.findOne({
+        where: {
+            userId: user.id,
+            id: req.params.bookingId
+        }
+    });
+    let existsBooking = await Booking.findByPk(req.params.bookingId)
+    if(!existsBooking){
+        res.status(404);
+        return res.json({
+            "message": "Booking couldn't be found",
+            "statusCode": 404
+          })
+    }
+    if(!editBooking){
+        res.status(403);
+        return res.json({
+            "message": "Forbidden",
+            "statusCode": 403
+          })
+    } else {
+        if(endDate <= startDate){
+            res.status(400);
+            return res.json({
+                "message": "Validation error",
+                "statusCode": 400,
+                "errors": {
+                  "endDate": "endDate cannot be on or come before startDate"
+                }
+              })
+        }
+        if(editBooking.endDate.getTime() < (new Date()).getTime()){
+            res.status(403);
+            return res.json({
+                "message": "Past bookings can't be modified",
+                "statusCode": 403
+              })
+        }
+        if(((editBooking.startDate.getTime() <= (new Date(startDate).getTime())) && ((new Date(startDate).getTime()) <= editBooking.endDate.getTime())) || ((editBooking.startDate.getTime() <= (new Date(endDate).getTime())) && ((new Date(endDate).getTime()) <= editBooking.endDate.getTime()))){
+            res.status(403);
+            return res.json({
+                "message": "Sorry, this spot is already booked for the specified dates",
+                "statusCode": 403,
+                "errors": {
+                  "startDate": "Start date conflicts with an existing booking",
+                  "endDate": "End date conflicts with an existing booking"
+                }
+              })
+        }
+        else {
+            editBooking.startDate = startDate;
+            editBooking.endDate = endDate;
+            await editBooking.save();
+            res.status(200);
+            res.json(editBooking)
+        }
+    }
+})
+
 
 module.exports = router

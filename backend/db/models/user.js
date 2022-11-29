@@ -53,14 +53,14 @@ module.exports = (sequelize, DataTypes) => {
           hooks: true
         }
       )
-      User.belongsToMany(
-        models.Spot,
-        {through: models.Booking}
-      );
-      User.belongsToMany(
-        models.Spot,
-        {through: models.Review}
-      );
+      // User.belongsToMany(
+      //   models.Spot,
+      //   {through: models.Booking}
+      // );
+      // User.belongsToMany(
+      //   models.Spot,
+      //   {through: models.Review}
+      // );
       User.hasMany(
         models.Booking, {
           foreignKey: 'userId',

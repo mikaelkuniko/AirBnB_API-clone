@@ -101,13 +101,14 @@ router.post(
       let token = await setTokenCookie(res,user);
 
       return res.json({
+        'user': {
         // user
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
         username: user.username,
         token: token
-      })
+      }})
     },
     validateSignup
   );

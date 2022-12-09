@@ -53,13 +53,14 @@ const validateLogin = [
 
 
       return res.json({
+        'user': {
         id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
         username: user.username,
         token: token
-      });
+      }});
     },
     validateLogin
   );
@@ -81,13 +82,14 @@ const validateLogin = [
         'user': null
       })
     } else {
-      return res.json({
+      return res.json(
+        { 'user': {
         id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
         username: user.username
-      })
+      }})
     }
   }, requireAuth)
 

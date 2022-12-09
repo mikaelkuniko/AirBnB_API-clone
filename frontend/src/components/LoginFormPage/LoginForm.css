@@ -1,0 +1,14 @@
+form {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+  }
+
+label {
+  margin-left: 10px
+}
+
+input {
+  margin-right: 5px;
+  margin-left: 5px
+}

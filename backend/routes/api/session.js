@@ -73,17 +73,23 @@ const validateLogin = [
     }
   );
 
-  router.get('/', requireAuth, async (req,res, next) => {
+  router.get('/', async (req,res, next) => {
     let {user} = req;
-    // console.log(user)
-    return res.json({
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      username: user.username
-    })
-  })
+    console.log(user)
+    if(!user){
+      return res.json({
+        'user': null
+      })
+    } else {
+      return res.json({
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        username: user.username
+      })
+    }
+  }, requireAuth)
 
   router.get(
     '/',

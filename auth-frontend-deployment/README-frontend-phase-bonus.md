@@ -172,7 +172,7 @@ modal opening is clicked.
 Refactor the `ProfileButton` component by passing in an `onButtonClick` prop
 into both `OpenModalButton` components as a callback function that will close
 the dropdown menu when invoked. Then for logout, you can use the same callback
-function to close the dropdown menu after the logout `dispatch`. 
+function to close the dropdown menu after the logout `dispatch`.
 
 Here's an example for how the `ProfileButton` component should look like now:
 
@@ -393,6 +393,8 @@ function ProfileButton({ user }) {
 
 export default ProfileButton;
 ```
+
+!!!!!!! did not integrate this feature !!!!!
 
 Make sure to test your code! Head to the home page, [http://localhost:3000],
 and make sure you are logged out. Click the `"Log In"` and `"Sign Up"` menu

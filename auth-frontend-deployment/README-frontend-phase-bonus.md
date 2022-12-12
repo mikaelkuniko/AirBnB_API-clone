@@ -394,8 +394,6 @@ function ProfileButton({ user }) {
 export default ProfileButton;
 ```
 
-!!!!!!! did not integrate this feature !!!!!
-
 Make sure to test your code! Head to the home page, [http://localhost:3000],
 and make sure you are logged out. Click the `"Log In"` and `"Sign Up"` menu
 items and make sure the modals pop up and function as before.

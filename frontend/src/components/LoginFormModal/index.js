@@ -25,11 +25,12 @@ function LoginFormModal() {
   };
 
 const demoLogIn = (e) => {
-  // e.preventDefault();
-  setCredential('demouser')
-  setPassword('password')
+  e.preventDefault();
+  // setCredential('Demo-lition')
+  // setPassword('password')
+  
   // setErrors([]);
-  return dispatch(sessionActions.login({credential,password}))
+  return dispatch(sessionActions.login({credential:'Demo-lition', password: 'password'}))
     .then(closeModal)
   //   .catch(
   //     async (res) => {

@@ -1,4 +1,5 @@
 const LOAD_SPOTS = "spots/LOAD_SPOTS";
+const LOAD_SINGLE_SPOT = "spots/LOAD_SINGLE_SPOT"
 const UPDATE_SPOT = "spots/UPDATE_SPOT";
 const REMOVE_SPOT = "spots/REMOVE_SPOT";
 const ADD_SPOT = "spots/ADD_SPOT";
@@ -7,6 +8,11 @@ const load = (spots) => ({
   type: LOAD_SPOTS,
   spots
 });
+
+const loadSingle = (spot) => ({
+    type: LOAD_SINGLE_SPOT,
+    spot
+})
 
 const update = (spot) => ({
   type: UPDATE_SPOT,
@@ -31,6 +37,15 @@ export const getAllSpots = () => async dispatch => {
         dispatch(load(acquiredSpots));
     }
 };
+
+export const getSingleSpot = (spotId) => async dispatch => {
+    const response = await fetch(`/api/spots/${spotId}`)
+
+    if(response.ok){
+        const foundSpot = await response.json();
+        dispatch(loadSingle(foundSpot))
+    }
+}
 
 export const updateSpot = (spot, spotId) => async dispatch => {
     const response = await fetch(`/api/spots/${spotId}`, {
@@ -59,6 +74,13 @@ export const addSpot = (addedSpot, ownerId) => async dispatch => {
 
     if(response.ok){
       const newSpot = await response.json();
+    //   pseudo code
+    //   const newImageResponse = await fetch(`/api/spots/${newSpot.id}/images`, {})
+    //   if(newImageResponse.ok){
+    //     const newImage = await newImageResponse.json(
+    //     )
+    //   }
+
       dispatch(add(newSpot));
       return newSpot
     }
@@ -88,22 +110,34 @@ const spotsReducer = (state = initialState, action) => {
     let newState;
     switch(action.type){
         case LOAD_SPOTS:
-            const newSpots = {};
-            action.allSpot.forEach(spot => {
-                newSpots[spot.id] = spot;
+            // console.log("This is action.spots", action.spots)
+            // console.log("This is action.spots.Spots", action.spots.Spots)
+            newState = {...state};
+            let newAllSpots = {}
+            action.spots.Spots.forEach(spot => {
+                newAllSpots[spot.id] = spot;
             })
-            return {
-                ...state,
-                allSpots: {...newSpots}
-            };
+            newState.allSpots = newAllSpots
+            return newState;
+        case LOAD_SINGLE_SPOT:
+            newState = {...state};
+            // pseudo code below
+            let newSingleSpot = {}
+            newSingleSpot = {[action.spot.id]: action.spot}
+            newState.singleSpot = newSingleSpot
+            return newState
         case REMOVE_SPOT:
             newState = {...state}
-            delete newState[action.spotId];
+            delete newState.allSpots[action.spotId];
             return newState;
         case ADD_SPOT:
-            return {...state, [action.spot.spotId]: action.spot}
+            newState = {...state}
+            newState.allSpots = {...newState.allSpots, [action.spot.spotId]: action.spot}
+            return newState
         case UPDATE_SPOT:
-            return {...state, [action.spot.spotId]: action.spot}
+            newState = {...state}
+            newState.allSpots = {...newState.allSpots, [action.spot.spotId]: action.spot}
+            return newState
         default:
             return state;
     }

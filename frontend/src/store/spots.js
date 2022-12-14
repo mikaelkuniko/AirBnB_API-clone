@@ -123,12 +123,12 @@ const initialState = {
 
 const spotsReducer = (state = initialState, action) => {
     let newState;
+    let newAllSpots = {}
     switch(action.type){
         case LOAD_SPOTS:
             // console.log("This is action.spots", action.spots)
             // console.log("This is action.spots.Spots", action.spots.Spots)
             newState = {...state};
-            let newAllSpots = {}
             action.spots.Spots.forEach(spot => {
                 newAllSpots[spot.id] = spot;
             })
@@ -144,15 +144,22 @@ const spotsReducer = (state = initialState, action) => {
             return newState
         case REMOVE_SPOT:
             newState = {...state}
-            delete newState.allSpots[action.spotId];
+            newAllSpots = {...state.allSpots}
+            delete newAllSpots[action.spotId];
+            newState.allSpots = newAllSpots
             return newState;
         case ADD_SPOT:
             newState = {...state}
-            newState.allSpots = {...newState.allSpots, [action.spot.spotId]: action.spot}
+            newAllSpots = {...state.allSpots, [action.spot.spotId]: action.spot}
+            // newState.allSpots = {...newState.allSpots, [action.spot.spotId]: action.spot}
+            newState.allSpots = newAllSpots
             return newState
         case UPDATE_SPOT:
             newState = {...state}
-            newState.allSpots = {...newState.allSpots, [action.spot.spotId]: action.spot}
+            newAllSpots = {...state.allSpots}
+            newAllSpots[action.spot.spotId] = action.spot
+            newState.allSpots = newAllSpots
+            // newState.allSpots = {...newState.allSpots, [action.spot.spotId]: action.spot}
             return newState
         default:
             return state;

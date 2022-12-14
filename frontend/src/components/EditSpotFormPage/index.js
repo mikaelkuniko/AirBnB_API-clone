@@ -1,10 +1,10 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect} from 'react';
 import {useDispatch} from "react-redux";
 import { useModal } from '../../context/Modal';
 import * as spotActions from '../../store/spots';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
-const AddSpotForm = () => {
+const EditSpotForm = () => {
 const dispatch = useDispatch();
 const [address, setAddress] = useState('')
 const [city, setCity] = useState('')
@@ -22,6 +22,7 @@ const [preview, setPreview] = useState(false)
 const [errors, setErrors] = useState([]);
 const { closeModal } = useModal();
 const history = useHistory()
+const {spotId} = useParams()
 
 useEffect(()=> {
     //do the errors!!
@@ -44,13 +45,13 @@ useEffect(()=> {
 const handleSubmit = (e) => {
     e.preventDefault()
     let spotObj = {address, city, state, country, lat, lng, name, description, price}
-    let spotImageObj= {imageUrl, preview}
+    // let spotImageObj= {imageUrl, preview}
 
-    console.log("Spot object", spotObj)
-    console.log("SpotImage object", spotImageObj)
+    // console.log("Spot object", spotObj)
+    // console.log("SpotImage object", spotImageObj)
 
-    return dispatch(spotActions.addSpot(spotObj, spotImageObj))
-        .then(() => history.push('/'))
+    return dispatch(spotActions.updateSpot(spotObj, spotId))
+        .then(() => history.push(`/spot/${spotId}`))
 
     setAddress('')
     setCity('')
@@ -66,7 +67,7 @@ const handleSubmit = (e) => {
 }
     return (
         <>
-        <h1>Add Location</h1>
+        <h1>Edit Location</h1>
         <form onSubmit={handleSubmit}>
         {!!errors.length && (
         <div>
@@ -134,7 +135,7 @@ const handleSubmit = (e) => {
             onChange={(e) => setPrice(e.target.value)}
           />
         </label>
-        <label>
+        {/* <label>
           Image URL
           <input
             type="text"
@@ -162,10 +163,11 @@ const handleSubmit = (e) => {
         />
         Preview Image
       </label>
-        <button type="submit">Add location</button>
+        <button type="submit">Add location</button> */}
+        <button type="submit">Edit Location</button>
       </form>
     </>
       );
 }
 
-export default AddSpotForm
+export default EditSpotForm

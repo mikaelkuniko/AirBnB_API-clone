@@ -2,10 +2,16 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {getSingleSpot} from '../../store/spots'
+import {useHistory} from 'react-router-dom'
 
 const SpotDetail = () => {
     const dispatch = useDispatch()
     const {spotId} = useParams()
+    const history = useHistory
+
+    const editRouteRedirect = () => {
+        history.push(`/spots/${spotId}/edit`)
+    }
 
     const spot = useSelector((state)=>state.spots.singleSpot)
     console.log('This is spot', spot)
@@ -37,6 +43,9 @@ const SpotDetail = () => {
             <div>
                 <p>{spot.description}</p>
                 <p>${spot.price} per night</p>
+            </div>
+            <div>
+                <button onClick={editRouteRedirect}>Edit Location</button>
             </div>
         </div>
 

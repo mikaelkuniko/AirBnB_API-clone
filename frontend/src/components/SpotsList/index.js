@@ -1,20 +1,21 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Switch, NavLink } from 'react-router-dom';
+// import { Route, Switch, NavLink } from 'react-router-dom';
 import { getAllSpots } from '../../store/spots';
 import SpotCard from '../SpotsCards'
+// import SpotDetail from '../SpotDetails';
 
 const SpotsList = () => {
     const dispatch = useDispatch();
     const spots = useSelector(state=>state.spots.allSpots);
 
-    console.log('State obj', useSelector(state=>state))
+    // console.log('State obj', useSelector(state=>state))
 
-    console.log("this is spots", spots);
+    // console.log("this is spots", spots);
 
     const spotsArr = Object.values(spots)
 
-    console.log("This is spotsArr", spotsArr)
+    // console.log("This is spotsArr", spotsArr)
 
     useEffect(()=>{
         dispatch(getAllSpots());
@@ -31,7 +32,6 @@ const SpotsList = () => {
                     <SpotCard key={spot.id} {...spot} />
                 ))}
             </ul>
-
         </div>
 
     )

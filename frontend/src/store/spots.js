@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 const LOAD_SPOTS = "spots/LOAD_SPOTS";
 const LOAD_SINGLE_SPOT = "spots/LOAD_SINGLE_SPOT"
 const UPDATE_SPOT = "spots/UPDATE_SPOT";
@@ -30,7 +32,7 @@ const remove = (spotId) => ({
 });
 
 export const getAllSpots = () => async dispatch => {
-    const response = await fetch('/api/spots')
+    const response = await csrfFetch('/api/spots')
 
     if (response.ok){
         const acquiredSpots = await response.json();
@@ -39,7 +41,7 @@ export const getAllSpots = () => async dispatch => {
 };
 
 export const getSingleSpot = (spotId) => async dispatch => {
-    const response = await fetch(`/api/spots/${spotId}`)
+    const response = await csrfFetch(`/api/spots/${spotId}`)
 
     if(response.ok){
         const foundSpot = await response.json();
@@ -48,7 +50,7 @@ export const getSingleSpot = (spotId) => async dispatch => {
 }
 
 export const updateSpot = (spot, spotId) => async dispatch => {
-    const response = await fetch(`/api/spots/${spotId}`, {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -63,8 +65,8 @@ export const updateSpot = (spot, spotId) => async dispatch => {
     }
 }
 
-export const addSpot = (addedSpot, ownerId) => async dispatch => {
-    const response = await fetch(`/api/spots`, {
+export const addSpot = (addedSpot, spotImage) => async dispatch => {
+    const response = await csrfFetch(`/api/spots`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -74,12 +76,25 @@ export const addSpot = (addedSpot, ownerId) => async dispatch => {
 
     if(response.ok){
       const newSpot = await response.json();
-    //   pseudo code
-    //   const newImageResponse = await fetch(`/api/spots/${newSpot.id}/images`, {})
-    //   if(newImageResponse.ok){
-    //     const newImage = await newImageResponse.json(
-    //     )
-    //   }
+      const {imageUrl, preview} = spotImage
+      let newSpotImage = {
+        url: imageUrl,
+        preview
+      }
+      const newImageResponse = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
+        method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newSpotImage)
+      })
+      if(newImageResponse.ok){
+        const newImage = await newImageResponse.json()
+        console.log("this is newSpot", newSpot)
+        console.log("this is newSpotImage", newImage)
+        // const newObj = {...newSpot, newSpot.SpotImages = [newImage]}
+        // unsure if this correct??
+      }
 
       dispatch(add(newSpot));
       return newSpot
@@ -87,7 +102,7 @@ export const addSpot = (addedSpot, ownerId) => async dispatch => {
   }
 
   export const removeSpot = (spotId) => async dispatch =>{
-    const response = await fetch(`/api/spots/${spotId}`, {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -123,7 +138,8 @@ const spotsReducer = (state = initialState, action) => {
             newState = {...state};
             // pseudo code below
             let newSingleSpot = {}
-            newSingleSpot = {[action.spot.id]: action.spot}
+            // newSingleSpot = {[action.spot.id]: action.spot}
+            newSingleSpot = action.spot
             newState.singleSpot = newSingleSpot
             return newState
         case REMOVE_SPOT:

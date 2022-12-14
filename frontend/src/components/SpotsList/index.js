@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { Route, Switch, NavLink } from 'react-router-dom';
 import { getAllSpots } from '../../store/spots';
 import SpotCard from '../SpotsCards'
+import { useHistory } from 'react-router-dom';
 // import SpotDetail from '../SpotDetails';
 
 const SpotsList = () => {
     const dispatch = useDispatch();
     const spots = useSelector(state=>state.spots.allSpots);
-
+    const history = useHistory()
     // console.log('State obj', useSelector(state=>state))
 
     // console.log("this is spots", spots);
@@ -21,6 +22,9 @@ const SpotsList = () => {
         dispatch(getAllSpots());
     }, [dispatch]);
 
+    const newSpotRouteRedirect = () => {
+        history.push(`/spots/new`)
+    }
 
     if (!spots) return null
     return (
@@ -32,6 +36,11 @@ const SpotsList = () => {
                     <SpotCard key={spot.id} {...spot} />
                 ))}
             </ul>
+            <div>
+                <button onClick={newSpotRouteRedirect}>
+                    Add Location
+                </button>
+            </div>
         </div>
 
     )

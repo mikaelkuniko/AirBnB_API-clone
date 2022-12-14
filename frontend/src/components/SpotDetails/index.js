@@ -3,14 +3,20 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {getSingleSpot} from '../../store/spots'
 import {useHistory} from 'react-router-dom'
+import { removeSpot } from '../../store/spots';
 
 const SpotDetail = () => {
     const dispatch = useDispatch()
     const {spotId} = useParams()
-    const history = useHistory
+    const history = useHistory()
 
     const editRouteRedirect = () => {
         history.push(`/spots/${spotId}/edit`)
+    }
+
+    const deleteLocation = () => {
+       dispatch(removeSpot(spotId));
+       history.push(`/`);
     }
 
     const spot = useSelector((state)=>state.spots.singleSpot)
@@ -28,8 +34,8 @@ const SpotDetail = () => {
         <div>
             <div>
             <h1>{spot.name} in {spot.city}, {spot.state}</h1>
-            <p>Average Rating: {spot.avgStarRating}</p>
-            <p>Reviews: {spot.numReviews}</p>
+            <p>Average Rating: {spot.avgStarRating ? spot.avgStarRating : 'New location'}</p>
+            <p>Reviews: {spot.numReviews ? spot.numReviews : 'New location'}</p>
             <p>{spot.city}, {spot.state}, {spot.country}</p>
             </div>
             <div>
@@ -46,6 +52,9 @@ const SpotDetail = () => {
             </div>
             <div>
                 <button onClick={editRouteRedirect}>Edit Location</button>
+            </div>
+            <div>
+                <button onClick={deleteLocation}>Delete location</button>
             </div>
         </div>
 

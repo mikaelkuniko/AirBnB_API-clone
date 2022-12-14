@@ -7,7 +7,7 @@ const SpotCard = ({ id ,name, address, city, state, country, lat, lng, descripti
         <h2>{name}</h2>
         <h3>{address}, {city}, {state} </h3>
         <p>${price} per night</p>
-        <p>Rating:{avgRating}</p>
+        <p>Rating:{avgRating ? avgRating : ' New Location'}</p>
         </NavLink>
       </li>
     );

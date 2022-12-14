@@ -32,7 +32,7 @@ useEffect(()=> {
     if(country.length === 0) errors.push("Country must be a valid country")
     if(name.length === 0) errors.push("Name must be inputted")
     if(description.length === 0) errors.push("There must be a description")
-    if(+price < 0) errors.push("Price must be greater than 0")
+    if(+price <= 0) errors.push("Price must be greater than 0")
 
     setErrors(errors);
   }, [address, city, state, country, lat, lng, name, description, price])

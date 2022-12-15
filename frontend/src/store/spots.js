@@ -46,22 +46,28 @@ export const getSingleSpot = (spotId) => async dispatch => {
     if(response.ok){
         const foundSpot = await response.json();
         dispatch(loadSingle(foundSpot))
+        return foundSpot
     }
 }
 
-export const updateSpot = (spot, spotId) => async dispatch => {
+export const updateSpot = (editSpot, spotId, uneditedSpot) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(spot)
+          body: JSON.stringify(editSpot)
     })
 
     if(response.ok){
         const updatedSpot = await response.json()
-        dispatch(update(updatedSpot))
-        return updatedSpot
+        console.log('updated spot from database', updatedSpot)
+        let newSpotObj = {...updatedSpot, ...uneditedSpot}
+        console.log('single spot obj', newSpotObj)
+        // dispatch(update(updatedSpot))
+        // return updatedSpot
+        dispatch(update(newSpotObj))
+        return newSpotObj
     }
 }
 
@@ -94,10 +100,10 @@ export const addSpot = (addedSpot, spotImage) => async dispatch => {
         console.log("this is newSpotImage", newImage)
         // const newObj = {...newSpot, newSpot.SpotImages = [newImage]}
         // unsure if this correct??
+        dispatch(add(newSpot));
+        return newSpot
       }
 
-      dispatch(add(newSpot));
-      return newSpot
     }
   }
 
@@ -124,6 +130,7 @@ const initialState = {
 const spotsReducer = (state = initialState, action) => {
     let newState;
     let newAllSpots = {}
+    let newSingleSpot = {};;
     switch(action.type){
         case LOAD_SPOTS:
             // console.log("This is action.spots", action.spots)
@@ -137,16 +144,16 @@ const spotsReducer = (state = initialState, action) => {
         case LOAD_SINGLE_SPOT:
             newState = {...state};
             // pseudo code below
-            let newSingleSpot = {}
+
             // newSingleSpot = {[action.spot.id]: action.spot}
             newSingleSpot = action.spot
             newState.singleSpot = newSingleSpot
             return newState
         case REMOVE_SPOT:
-            newState = {...state}
-            newAllSpots = {...state.allSpots}
+            newState = {...state};
+            newAllSpots = {...state.allSpots};
             delete newAllSpots[action.spotId];
-            newState.allSpots = newAllSpots
+            newState.allSpots = newAllSpots;
             return newState;
         case ADD_SPOT:
             newState = {...state}
@@ -156,10 +163,15 @@ const spotsReducer = (state = initialState, action) => {
             return newState
         case UPDATE_SPOT:
             newState = {...state}
-            newAllSpots = {...state.allSpots}
-            newAllSpots[action.spot.spotId] = action.spot
-            newState.allSpots = newAllSpots
+            // make reducers consistent with information you want
+            newSingleSpot = {...action.spot}
+            newState.singleSpot = newSingleSpot
+            // redudant code
+            // newAllSpots = {...state.allSpots}
+            // newAllSpots[action.spot.spotId] = action.spot
+            // newState.allSpots = newAllSpots
             // newState.allSpots = {...newState.allSpots, [action.spot.spotId]: action.spot}
+            // redudant code
             return newState
         default:
             return state;

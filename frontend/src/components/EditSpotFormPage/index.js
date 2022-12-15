@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { useModal } from '../../context/Modal';
 import * as spotActions from '../../store/spots';
 import { useHistory, useParams } from 'react-router-dom';
@@ -16,7 +16,7 @@ const [lng, setLng] = useState(0)
 // lat/lng not functional currently
 const [name, setName] = useState('')
 const [description, setDescription] = useState('')
-const [price, setPrice] = useState(0)
+const [price, setPrice] = useState('')
 const [imageUrl, setImageUrl] = useState('')
 const [preview, setPreview] = useState(false)
 const [errors, setErrors] = useState([]);
@@ -42,16 +42,41 @@ useEffect(()=> {
 
   }, [errors])
 
+  useEffect(()=>{
+    dispatch(spotActions.getSingleSpot(spotId))
+        .then((res)=>{
+            // console.log('this is the response', res)
+            setAddress(res.address)
+            setCity(res.city)
+            setState(res.state)
+            setCountry(res.country)
+            setName(res.name)
+            setDescription(res.description)
+            setPrice(res.price)
+        })
+  }, [dispatch])
+
+  //grab owners and spot images from res
+//   let uneditedSpot = {}
+  const spot = useSelector((state)=>state.spots.singleSpot)
+  console.log('This is edit spot slice', spot)
+
 const handleSubmit = (e) => {
     e.preventDefault()
     let spotObj = {address, city, state, country, lat, lng, name, description, price}
+    let ownerImageObj = {Owner: spot.Owner, SpotImages: spot.SpotImages, avgStarRating: spot.avgStarRating, numReviews: spot.numReviews}
     // let spotImageObj= {imageUrl, preview}
 
     // console.log("Spot object", spotObj)
     // console.log("SpotImage object", spotImageObj)
+    // avgStarRating
+    // numReviews
 
-    return dispatch(spotActions.updateSpot(spotObj, spotId))
-        .then(() => history.push(`/spot/${spotId}`))
+    return dispatch(spotActions.updateSpot(spotObj, spotId, ownerImageObj))
+        .then(() => history.push(`/spots/${spotId}`))
+
+    // try async
+    // use await on dispatch on handlesubmit
 
     setAddress('')
     setCity('')
@@ -85,6 +110,7 @@ const handleSubmit = (e) => {
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
+            required
           />
         </label>
         <label>
@@ -93,6 +119,7 @@ const handleSubmit = (e) => {
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
+            required
           />
         </label>
         <label>
@@ -101,6 +128,7 @@ const handleSubmit = (e) => {
             type="text"
             value={state}
             onChange={(e) => setState(e.target.value)}
+            required
           />
         </label>
         <label>
@@ -109,6 +137,7 @@ const handleSubmit = (e) => {
             type="text"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
+            required
           />
         </label>
         <label>
@@ -117,6 +146,7 @@ const handleSubmit = (e) => {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
         </label>
         <label>
@@ -125,6 +155,7 @@ const handleSubmit = (e) => {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            required
           />
         </label>
         <label>
@@ -133,6 +164,7 @@ const handleSubmit = (e) => {
             type="text"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+            required
           />
         </label>
         {/* <label>

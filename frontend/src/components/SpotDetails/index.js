@@ -20,10 +20,10 @@ const SpotDetail = () => {
     }
 
     const spot = useSelector((state)=>state.spots.singleSpot)
-    console.log('This is spot', spot)
+    console.log('This is spot details', spot)
     // This takes the slice of state of spots : {singleSpot: {}}
     let spotImages = spot.SpotImages
-    console.log("this is spot images", spotImages)
+    console.log("this is spot images from spot details", spotImages)
 
     useEffect(()=> {
         dispatch(getSingleSpot(spotId))

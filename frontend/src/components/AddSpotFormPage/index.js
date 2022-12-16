@@ -46,8 +46,8 @@ const AddSpotForm = () => {
     let spotObj = {address, city, state, country, lat, lng, name, description, price}
     let spotImageObj= {imageUrl, preview}
 
-    console.log("Spot object", spotObj)
-    console.log("SpotImage object", spotImageObj)
+    // console.log("Spot object", spotObj)
+    // console.log("SpotImage object", spotImageObj)
 
     return dispatch(spotActions.addSpot(spotObj, spotImageObj))
         .then(() => history.push('/'))
@@ -79,6 +79,7 @@ const AddSpotForm = () => {
         </div>
       )}
         <label>
+          Address
           <input
             type="text"
             value={address}
@@ -88,6 +89,7 @@ const AddSpotForm = () => {
           />
         </label>
         <label>
+          City
           <input
             type="text"
             value={city}
@@ -97,6 +99,7 @@ const AddSpotForm = () => {
           />
         </label>
         <label>
+          State
           <input
             type="text"
             value={state}
@@ -106,6 +109,7 @@ const AddSpotForm = () => {
           />
         </label>
         <label>
+          Country
           <input
             type="text"
             value={country}
@@ -115,6 +119,7 @@ const AddSpotForm = () => {
           />
         </label>
         <label>
+          Name
           <input
             type="text"
             value={name}
@@ -124,6 +129,7 @@ const AddSpotForm = () => {
           />
         </label>
         <label>
+          Description
           <input
             type="text"
             value={description}
@@ -133,6 +139,7 @@ const AddSpotForm = () => {
           />
         </label>
         <label>
+          Price per night
           <input
             type="text"
             value={price}
@@ -142,6 +149,7 @@ const AddSpotForm = () => {
           />
         </label>
         <label>
+          Image URL
           <input
             type="text"
             value={imageUrl}

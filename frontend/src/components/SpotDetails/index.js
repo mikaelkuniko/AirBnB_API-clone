@@ -6,6 +6,7 @@ import {useHistory} from 'react-router-dom'
 import { removeSpot } from '../../store/spots';
 import { getAllSpotReviews } from '../../store/reviews';
 import ReviewCard from '../ReviewsCards';
+import './SpotDetails.css'
 
 const SpotDetail = () => {
     const dispatch = useDispatch()
@@ -26,22 +27,44 @@ const SpotDetail = () => {
     }
 
     const spot = useSelector((state)=>state.spots.singleSpot)
-    console.log('This is spot details', spot)
+    // console.log('This is spot details', spot)
     // This takes the slice of state of spots : {singleSpot: {}}
     let spotImages = spot.SpotImages
     // console.log("this is spot images from spot details", spotImages)
 
     // all reviews for spots
     const reviews = useSelector((state)=>state.reviews.spot)
-    console.log('This is reviews', reviews)
+    // console.log('This is reviews', reviews)
 
     const reviewsArr = Object.values(reviews)
-    console.log("this is reviewsArr", reviewsArr)
+    // console.log("this is reviewsArr", reviewsArr)
+
+    const state = useSelector(state=>state)
+    console.log("this is state",state)
+    let session = state.session
+    let owner = state.spots.singleSpot.Owner
+    console.log("This is spot owner", owner)
+    console.log("Check user", session.user)
+    console.log("Check session", session)
+
+    // console.log('is this true', owner.id === session.user.id)
+
+    // const buttonShow = (session.user || owner.id === session.user.id ? "" : " hidden");
+    const buttonShow = (session.user ? "" : " hidden");
 
     useEffect(()=> {
+        // console.log("Nothing was")
         dispatch(getSingleSpot(spotId))
+        // console.log('get spot ran')
         dispatch(getAllSpotReviews(spotId))
+        // console.log("reviews grabbed")
     },[spotId, dispatch])
+
+
+    //testing how site renders
+    // useEffect(()=>{
+
+    // }, [reviews])
 
     if(!spotImages) return null
     return(
@@ -74,13 +97,13 @@ const SpotDetail = () => {
                 </ul>
             </div>
             <div>
-                <button onClick={editRouteRedirect}>Edit Location</button>
+                <button onClick={editRouteRedirect} className={buttonShow}>Edit Location</button>
             </div>
             <div>
-                <button onClick={deleteLocation}>Delete location</button>
+                <button onClick={deleteLocation} className={buttonShow}>Delete location</button>
             </div>
             <div>
-                <button onClick={addReviewRedirect}>Add Review</button>
+                <button onClick={addReviewRedirect} className={buttonShow}>Add Review</button>
             </div>
         </div>
 

@@ -162,30 +162,33 @@ router.get('/', async(req, res, next)=> {
             model: SpotImage,
             attributes: ['url']
         }],
+        // raw: true,
+        // nest: true,
         // limit: size,
         // offset: size * (page - 1)
         ...pagination
     })
     let spotsArr = [];
+    // console.log("This is spots", spots)
     // console.log('This is spot', spots.length)
     // console.log('This is spots at index 1', spots[1].dataValues);
-    spots.forEach(async element => {
-        let sum = await Review.sum('stars',
-        {
-            where: {
-                spotId: element.id
-            }
-        });
-        // console.log('Sum', sum)
-        let count = await Review.count({
-            where: {
-                spotId: element.id
-            }
-        });
+
+    spots.forEach(element => {
+        let count = element.Reviews.length
+        let sum = 0;
+        element.Reviews.forEach((review)=> sum += review.stars )
+
+        // let [sum, count] = aggregratefinder(element)
+        // let foundAgg = aggregratefinder(element)
+        // console.log("this is return sum", sum)
+        // console.log("this is return count", count)
+        // console.log("This is the return value of helper", foundAgg)
+
         let avg = sum/count
+        // let avg = 5
         // console.log('This is avg', avg)
         // console.log(element.SpotImages[0].dataValues.url)
-        // console.log("This is element", element)
+        console.log("This is element", element)
         let allSpot = {
             id: element.id,
             ownerId: element.ownerId,
@@ -220,14 +223,19 @@ router.get('/', async(req, res, next)=> {
         }
         // console.log(allSpot);
         spotsArr.push(allSpot);
-        // console.log("this is in the loop", spotsArr)
-        if(element === spots[spots.length -1]){
-            res.json({
-                Spots: spotsArr,
-                ...pageSize
-            })
-        }
+        console.log("this is in the loop", spotsArr.length)
+        // if(element === spots[spots.length -1]){
+        //     res.json({
+        //         Spots: spotsArr,
+        //         ...pageSize
+        //     })
+        // }
     })
+    console.log("Spots arr after foreach", spotsArr.length)
+    res.json({
+        Spots: spotsArr,
+        ...pageSize
+})
 })
 
 //create a spot
@@ -522,7 +530,7 @@ router.post('/:spotId/reviews', requireAuth, validateReviews, async (req,res,nex
 // model review images runs into a validation error?
 router.get('/:spotId/reviews', async(req,res,next)=> {
     let spotId = req.params.spotId;
-    let foundSpots = await Review.findAll({
+    let foundReviews = await Review.findAll({
         where: {
             spotId: spotId
         },
@@ -537,17 +545,17 @@ router.get('/:spotId/reviews', async(req,res,next)=> {
             }
         ]
     })
-    if(foundSpots.length == 0){
-        res.status(404);
-        return res.json({
-            "message": "Spot couldn't be found",
-            "statusCode": 404
-          })
-    } else {
+    // if(foundSpots.length == 0){
+    //     res.status(404);
+    //     return res.json({
+    //         "message": "Spot couldn't be found",
+    //         "statusCode": 404
+    //       })
+    // } else {
         res.status(200);
         res.json({
-            Reviews: foundSpots})
-    }
+            Reviews: foundReviews})
+    // }
 });
 
 

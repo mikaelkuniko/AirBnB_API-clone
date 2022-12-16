@@ -33,7 +33,7 @@ const remove = (reviewId) => ({
 
 export const getAllSpotReviews = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
-
+    console.log('fetch obtained for all spots reviews')
     if(response.ok){
         const reviews = await response.json();
         dispatch(loadSpotReviews(reviews))
@@ -129,8 +129,11 @@ const reviewsReducer = (state = initialState, action) => {
         case REMOVE_REVIEW:
             newState = {...state};
             newUser = {...state.user}
+            newSpot = {...state.spot}
             delete newUser[action.reviewId]
+            delete newSpot[action.reviewId]
             newState.user = newUser
+            newState.spot = newSpot
             return newState
         default:
             return state;

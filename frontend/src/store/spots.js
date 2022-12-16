@@ -36,6 +36,7 @@ export const getAllSpots = () => async dispatch => {
 
     if (response.ok){
         const acquiredSpots = await response.json();
+        // console.log("This is acquired spots", acquiredSpots)
         dispatch(load(acquiredSpots));
     }
 };

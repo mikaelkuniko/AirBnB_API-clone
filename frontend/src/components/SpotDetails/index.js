@@ -41,8 +41,8 @@ const SpotDetail = () => {
 
     const state = useSelector(state=>state)
     console.log("this is state",state)
-    let session = state.session
-    let owner = state.spots.singleSpot.Owner
+    let session = useSelector(state=>state.session)
+    let owner = useSelector(state=> state.spots.singleSpot.Owner)
     console.log("This is spot owner", owner)
     console.log("Check user", session.user)
     console.log("Check session", session)
@@ -50,7 +50,9 @@ const SpotDetail = () => {
     // console.log('is this true', owner.id === session.user.id)
 
     // const buttonShow = (session.user || owner.id === session.user.id ? "" : " hidden");
+    // const ownedSpot = (owner.id === session.user.id ? "" : " hidden")
     const buttonShow = (session.user ? "" : " hidden");
+    // const buttonShow = (session.user ? ownedSpot : " hidden");
 
     useEffect(()=> {
         // console.log("Nothing was")

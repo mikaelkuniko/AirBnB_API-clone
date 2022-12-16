@@ -74,6 +74,21 @@ export const getAllUserReviews = () => async dispatch => {
           }
     }
 
+    export const removeReview = (reviewId) => async dispatch =>{
+        const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+          if(response.ok){
+            const deletedReview = await response.json();
+            dispatch(remove(reviewId))
+            return deletedReview
+          }
+      }
+
+
 const initialState = {
     spot: {},
     user: {}
@@ -110,6 +125,12 @@ const reviewsReducer = (state = initialState, action) => {
             newSpot = {...state.spot, [action.review.id]:action.review}
             // complete reducer
             newState.spot = newSpot
+            return newState
+        case REMOVE_REVIEW:
+            newState = {...state};
+            newUser = {...state.user}
+            delete newUser[action.reviewId]
+            newState.user = newUser
             return newState
         default:
             return state;

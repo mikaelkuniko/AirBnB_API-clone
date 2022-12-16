@@ -5,25 +5,25 @@ import * as spotActions from '../../store/spots';
 import { useHistory } from 'react-router-dom';
 
 const AddSpotForm = () => {
-const dispatch = useDispatch();
-const [address, setAddress] = useState('')
-const [city, setCity] = useState('')
-const [state, setState] = useState('')
-const [country, setCountry] = useState('')
-// lat/lng not functional currently
-const [lat, setLat] = useState(0)
-const [lng, setLng] = useState(0)
-// lat/lng not functional currently
-const [name, setName] = useState('')
-const [description, setDescription] = useState('')
-const [price, setPrice] = useState('')
-const [imageUrl, setImageUrl] = useState('')
-const [preview, setPreview] = useState(false)
-const [errors, setErrors] = useState([]);
-const { closeModal } = useModal();
-const history = useHistory()
+  const dispatch = useDispatch();
+  const [address, setAddress] = useState('')
+  const [city, setCity] = useState('')
+  const [state, setState] = useState('')
+  const [country, setCountry] = useState('')
+  // lat/lng not functional currently
+  const [lat, setLat] = useState(0)
+  const [lng, setLng] = useState(0)
+  // lat/lng not functional currently
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState('')
+  const [imageUrl, setImageUrl] = useState('')
+  const [preview, setPreview] = useState(false)
+  const [errors, setErrors] = useState([]);
+  const { closeModal } = useModal();
+  const history = useHistory()
 
-useEffect(()=> {
+  useEffect(()=> {
     //do the errors!!
     const errors = [];
     if(address.length === 0) errors.push("Address must be a valid address")
@@ -41,7 +41,7 @@ useEffect(()=> {
 
   }, [errors])
 
-const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     let spotObj = {address, city, state, country, lat, lng, name, description, price}
     let spotImageObj= {imageUrl, preview}

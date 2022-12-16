@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {getSingleSpot} from '../../store/spots'
 import {useHistory} from 'react-router-dom'
 import { removeSpot } from '../../store/spots';
+import { getAllSpotReviews } from '../../store/reviews';
+import ReviewCard from '../ReviewsCards';
 
 const SpotDetail = () => {
     const dispatch = useDispatch()
@@ -12,6 +14,10 @@ const SpotDetail = () => {
 
     const editRouteRedirect = () => {
         history.push(`/spots/${spotId}/edit`)
+    }
+
+    const addReviewRedirect = () => {
+        history.push(`/spots/${spotId}/reviews/new`)
     }
 
     const deleteLocation = () => {
@@ -23,10 +29,18 @@ const SpotDetail = () => {
     console.log('This is spot details', spot)
     // This takes the slice of state of spots : {singleSpot: {}}
     let spotImages = spot.SpotImages
-    console.log("this is spot images from spot details", spotImages)
+    // console.log("this is spot images from spot details", spotImages)
+
+    // all reviews for spots
+    const reviews = useSelector((state)=>state.reviews.spot)
+    console.log('This is reviews', reviews)
+
+    const reviewsArr = Object.values(reviews)
+    console.log("this is reviewsArr", reviewsArr)
 
     useEffect(()=> {
         dispatch(getSingleSpot(spotId))
+        dispatch(getAllSpotReviews(spotId))
     },[spotId, dispatch])
 
     if(!spotImages) return null
@@ -51,10 +65,22 @@ const SpotDetail = () => {
                 <p>${spot.price} per night</p>
             </div>
             <div>
+                <h3>{reviewsArr.length ? `${reviewsArr.length} Reviews` : 'No reviews available'}</h3>
+                <ul>
+                {reviewsArr.map((review)=>(
+                    // <li key={id}><NavLink to={`/spots/${id}`}>{name}</NavLink></li>
+                    <ReviewCard key={review.id} {...review} />
+                ))}
+                </ul>
+            </div>
+            <div>
                 <button onClick={editRouteRedirect}>Edit Location</button>
             </div>
             <div>
                 <button onClick={deleteLocation}>Delete location</button>
+            </div>
+            <div>
+                <button onClick={addReviewRedirect}>Add Review</button>
             </div>
         </div>
 

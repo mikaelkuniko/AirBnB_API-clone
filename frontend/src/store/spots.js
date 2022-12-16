@@ -61,9 +61,9 @@ export const updateSpot = (editSpot, spotId, uneditedSpot) => async dispatch => 
 
     if(response.ok){
         const updatedSpot = await response.json()
-        console.log('updated spot from database', updatedSpot)
+        // console.log('updated spot from database', updatedSpot)
         let newSpotObj = {...updatedSpot, ...uneditedSpot}
-        console.log('single spot obj', newSpotObj)
+        // console.log('single spot obj', newSpotObj)
         // dispatch(update(updatedSpot))
         // return updatedSpot
         dispatch(update(newSpotObj))

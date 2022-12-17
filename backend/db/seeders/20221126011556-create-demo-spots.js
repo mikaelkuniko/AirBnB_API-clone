@@ -18,7 +18,7 @@ module.exports = {
         country: 'USA',
         lat: 23.32,
         lng: 12.45,
-        name: 'Quaint 4 bedroom',
+        name: 'Urban Getaway',
         description: 'Good for a small getaway',
         price: 103
       },
@@ -30,7 +30,7 @@ module.exports = {
         country: 'USA',
         lat: 33.32,
         lng: 42.45,
-        name: '2 bedroom apartment',
+        name: 'Modern Apartment',
         description: 'Nice for a quick get away',
         price: 90
       },
@@ -42,7 +42,7 @@ module.exports = {
         country: 'USA',
         lat: 233.32,
         lng: 121.45,
-        name: '14 bedroom mansion',
+        name: 'Exclusive Hillside Mansion',
         description: 'Good for a large gathering',
         price: 3123
       },

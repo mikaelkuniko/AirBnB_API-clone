@@ -1,3 +1,11 @@
 .hidden {
     display: none
 }
+
+.spots-lists{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    display: grid;
+    grid-auto-flow: row dense;
+}

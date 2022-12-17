@@ -13,17 +13,17 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         spotId: 1,
-        url: 'house.png',
+        url: 'https://adorable-home.com/wp-content/uploads/2016/06/Modern-dark-interiors-1.jpg',
         preview: false
       },
       {
         spotId: 2,
-        url: 'apartment.png',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6VCe98OV9MQt8qGZ2TuYzUikNWEmXtU2Wqg&usqp=CAU',
         preview: false
       },
       {
         spotId: 3,
-        url: 'mansion.png',
+        url: 'https://www.yankodesign.com/images/design_news/2020/06/all-black-interior-designs-that-will-inspire-you-to-adapt-this-modern-minimal-trend/10-Black-Interior-Design-Inspiration_Vipp-Shelter_yankodesign1.jpg',
         preview: false
       },
     ], {});

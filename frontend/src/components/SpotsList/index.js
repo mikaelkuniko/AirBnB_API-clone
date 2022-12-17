@@ -35,9 +35,9 @@ const SpotsList = () => {
 
     if (!spots) return null
     return (
-        <div>
+        <div className='spots-lists'>
             <h1>Accomodations</h1>
-            <ul>
+            <ul className ='spots-cards'>
                 {spotsArr.map((spot)=>(
                     // <li key={id}><NavLink to={`/spots/${id}`}>{name}</NavLink></li>
                     <SpotCard key={spot.id} {...spot} />

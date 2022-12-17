@@ -5,6 +5,7 @@ import * as spotActions from '../../store/spots';
 import { useHistory, useParams } from 'react-router-dom';
 
 const EditSpotForm = () => {
+
 const dispatch = useDispatch();
 const [address, setAddress] = useState('')
 const [city, setCity] = useState('')

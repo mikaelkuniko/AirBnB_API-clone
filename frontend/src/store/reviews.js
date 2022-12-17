@@ -33,7 +33,7 @@ const remove = (reviewId) => ({
 
 export const getAllSpotReviews = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
-    console.log('fetch obtained for all spots reviews')
+    // console.log('fetch obtained for all spots reviews')
     if(response.ok){
         const reviews = await response.json();
         dispatch(loadSpotReviews(reviews))

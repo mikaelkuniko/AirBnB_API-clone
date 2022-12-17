@@ -97,8 +97,8 @@ export const addSpot = (addedSpot, spotImage) => async dispatch => {
       })
       if(newImageResponse.ok){
         const newImage = await newImageResponse.json()
-        console.log("this is newSpot", newSpot)
-        console.log("this is newSpotImage", newImage)
+        // console.log("this is newSpot", newSpot)
+        // console.log("this is newSpotImage", newImage)
         // const newObj = {...newSpot, newSpot.SpotImages = [newImage]}
         // unsure if this correct??
         dispatch(add(newSpot));

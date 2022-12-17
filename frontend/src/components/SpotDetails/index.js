@@ -40,18 +40,17 @@ const SpotDetail = () => {
     // console.log("this is reviewsArr", reviewsArr)
 
     const state = useSelector(state=>state)
-    console.log("this is state",state)
-    let session = useSelector(state=>state.session)
+    // console.log("this is state",state)
+    let user = useSelector(state=>state.session.user)
     let owner = useSelector(state=> state.spots.singleSpot.Owner)
-    console.log("This is spot owner", owner)
-    console.log("Check user", session.user)
-    console.log("Check session", session)
+    // console.log("This is spot owner", owner)
+    // console.log("Check user", user)
 
     // console.log('is this true', owner.id === session.user.id)
 
     // const buttonShow = (session.user || owner.id === session.user.id ? "" : " hidden");
     // const ownedSpot = (owner.id === session.user.id ? "" : " hidden")
-    const buttonShow = (session.user ? "" : " hidden");
+    const buttonShow = (user ? "" : " hidden");
     // const buttonShow = (session.user ? ownedSpot : " hidden");
 
     useEffect(()=> {
@@ -62,6 +61,35 @@ const SpotDetail = () => {
         // console.log("reviews grabbed")
     },[spotId, dispatch])
 
+    const userLoggedIn = !!user
+    // console.log('this is user log in', userLoggedIn)
+    let ownedButton;
+   if(userLoggedIn && !!owner){
+    console.log('This is user in if cond', user)
+    console.log('This is owner in if cond', owner)
+    if(user.id === owner.id){
+        ownedButton = <div className="owned">
+            <div>
+            <button onClick={editRouteRedirect}>
+                Edit Location
+            </button>
+            </div>
+            <div>
+                <button onClick={deleteLocation}>
+                    Delete Location
+                </button>
+            </div>
+        </div>
+    }
+    else {
+        ownedButton= <div className='unowned'>
+            <button onClick={addReviewRedirect}>Add Review</button>
+        </div>
+    }
+   } else {
+    ownedButton = <div></div>
+   }
+
 
     //testing how site renders
     // useEffect(()=>{
@@ -69,6 +97,8 @@ const SpotDetail = () => {
     // }, [reviews])
 
     if(!spotImages) return null
+    // if(!owner || !user.id) return null
+
     return(
         <div>
             <div>
@@ -98,15 +128,21 @@ const SpotDetail = () => {
                 ))}
                 </ul>
             </div>
+            {ownedButton}
+            {/* {(user.id === owner.id) && <div className="owned">
             <div>
-                <button onClick={editRouteRedirect} className={buttonShow}>Edit Location</button>
+                <button onClick={editRouteRedirect}>Edit Location</button>
             </div>
             <div>
-                <button onClick={deleteLocation} className={buttonShow}>Delete location</button>
+                <button onClick={deleteLocation}>Delete location</button>
             </div>
+                </div>
+                }
+                {(user.id !== owner.id) && <div className="unowned">
             <div>
                 <button onClick={addReviewRedirect} className={buttonShow}>Add Review</button>
             </div>
+                    </div>} */}
         </div>
 
     )

@@ -152,7 +152,7 @@ const handleSubmit = (e) => {
         </label>
         <label>
           Description
-          <input
+          <textarea
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}

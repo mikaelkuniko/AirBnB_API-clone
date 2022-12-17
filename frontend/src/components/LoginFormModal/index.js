@@ -28,7 +28,7 @@ const demoLogIn = (e) => {
   e.preventDefault();
   // setCredential('Demo-lition')
   // setPassword('password')
-  
+
   // setErrors([]);
   return dispatch(sessionActions.login({credential:'Demo-lition', password: 'password'}))
     .then(closeModal)
@@ -67,7 +67,7 @@ const demoLogIn = (e) => {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <button type="submit" className='log-in-button'>Log In</button>
         <button onClick={demoLogIn}>Demo</button>
       </form>
     </>

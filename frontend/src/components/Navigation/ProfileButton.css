@@ -29,7 +29,7 @@
     background-color: #ffffff;
     border: 1px solid #dddddd;
     /* border-radius: 21px; */
-    font-size: 17px;
+    font-size: 20px;
 }
 
 #solid-bars{
@@ -47,5 +47,29 @@
     text-align: center;
     width:65px;
     font-family: 'Circular','BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif;
+    transition-property: all;
 }
 
+#sign-up-modal{
+    font-family: inherit;
+    transition-property: all;
+}
+
+#sign-up-modal:hover{
+    background-color: rgba(118,118,118,0.2);
+}
+
+#log-in-modal{
+    font-family: inherit;
+    transition-property: all;
+}
+
+#log-in-modal:hover{
+    background-color: rgba(118,118,118,0.2);
+}
+
+
+/*
+.log-in-sign-up:hover{
+    background-color: rgba(118,118,118,0.2);
+} */

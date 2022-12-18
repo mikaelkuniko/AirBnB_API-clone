@@ -1,0 +1,9 @@
+.spot-card{
+    display: flex;
+}
+
+.spot-image{
+    width: 250px;
+    height: 250px;
+    border-radius: 5%;
+}

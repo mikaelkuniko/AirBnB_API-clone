@@ -65,8 +65,8 @@ const SpotDetail = () => {
     // console.log('this is user log in', userLoggedIn)
     let ownedButton;
    if(userLoggedIn && !!owner){
-    console.log('This is user in if cond', user)
-    console.log('This is owner in if cond', owner)
+    // console.log('This is user in if cond', user)
+    // console.log('This is owner in if cond', owner)
     if(user.id === owner.id){
         ownedButton = <div className="owned">
             <div>

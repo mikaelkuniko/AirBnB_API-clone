@@ -29,25 +29,22 @@ const SpotsList = () => {
         dispatch(getAllSpots());
     }, [dispatch]);
 
-    const newSpotRouteRedirect = () => {
-        history.push(`/spots/new`)
-    }
+    // const newSpotRouteRedirect = () => {
+    //     history.push(`/spots/new`)
+    // }
 
     if (!spots) return null
     return (
         <div className='spots-lists'>
-            <h1>Accomodations</h1>
-            <ul className ='spots-cards'>
                 {spotsArr.map((spot)=>(
                     // <li key={id}><NavLink to={`/spots/${id}`}>{name}</NavLink></li>
                     <SpotCard key={spot.id} {...spot} />
                 ))}
-            </ul>
-            <div>
+            {/* <div>
                 <button onClick={newSpotRouteRedirect} className={buttonShow}>
                     Add Location
                 </button>
-            </div>
+            </div> */}
         </div>
 
     )

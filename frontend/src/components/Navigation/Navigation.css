@@ -1,3 +1,20 @@
 .navigation-bar{
-    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* in row its x axis */
+    align-content: center;
+    /* in row its y axis */
+    border-bottom: 1px solid rgba(118,118,118,0.8);
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 7px;
+}
+
+.right-nav-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }

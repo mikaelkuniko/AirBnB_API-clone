@@ -1,11 +1,14 @@
-.hidden {
+/* .hidden {
     display: none
-}
+} */
 
 .spots-lists{
-    margin: auto;
-    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    /* margin: auto; */
     padding: 10px;
-    display: grid;
-    grid-auto-flow: row dense;
+    /* display: grid; */
+    /* grid-auto-flow: row dense; */
 }

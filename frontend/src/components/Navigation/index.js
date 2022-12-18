@@ -16,14 +16,15 @@ function Navigation({ isLoaded }){
   return (
     <div className='navigation-bar'>
       <div className='left-nav-div'>
-        <NavLink exact to="/"><i class="fa-solid fa-cloud-moon"></i></NavLink>
+        <NavLink exact to="/"><i class="fa-solid fa-cloud-moon">AlphaBnB</i></NavLink>
       </div>
       {isLoaded && (
         <div className='right-nav-div'>
-          <button onClick={newSpotRouteRedirect} className="add-location">
+          {/* <button onClick={newSpotRouteRedirect} className="add-location">
                     Add Location
-                </button>
-          <ProfileButton user={sessionUser} />
+                </button> */}
+          <NavLink to="/spots/new" id="add-spot-link">Alphabnb your home</NavLink>
+          <ProfileButton user={sessionUser}/>
         </div>
       )}
     </div>

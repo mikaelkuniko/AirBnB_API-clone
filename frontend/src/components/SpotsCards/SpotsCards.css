@@ -7,3 +7,23 @@
     height: 250px;
     border-radius: 5%;
 }
+
+.top-info-div{
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.bottom-info-span{
+    display: flex;
+}
+
+#price-text{
+    font-weight: bold;
+}
+
+#night-text{
+    margin-left: 5px;
+}

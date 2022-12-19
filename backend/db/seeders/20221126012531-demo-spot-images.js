@@ -18,7 +18,7 @@ module.exports = {
       },
       {
         spotId: 2,
-        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6VCe98OV9MQt8qGZ2TuYzUikNWEmXtU2Wqg&usqp=CAU',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0WgQzEXkPOMzhk0h0ZVrErikZDOu9FtH6hQ&usqp=CAU',
         preview: false
       },
       {

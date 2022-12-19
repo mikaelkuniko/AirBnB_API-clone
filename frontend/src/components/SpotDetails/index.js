@@ -111,7 +111,7 @@ const SpotDetail = () => {
             {spotImages.map((image)=>(
                 // console.log(image.url)
                 <div key={image.id}>
-                    <img src={image.url} alt='spot image'/>
+                    <img src={image.url} alt='spot image' className='spot-details-image'/>
                 </div>
             ))}
             </div>

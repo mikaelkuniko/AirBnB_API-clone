@@ -25,7 +25,7 @@ module.exports = {
       {
         ownerId: 2,
         address: '1839 Hausely street',
-        city: 'Garden Grove',
+        city: 'Santa Monica',
         state: 'California',
         country: 'USA',
         lat: 33.32,

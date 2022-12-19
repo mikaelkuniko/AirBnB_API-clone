@@ -1,3 +1,8 @@
 .hidden {
     display: none
 }
+
+.spot-details-image{
+    height: 500px;
+    width: 500px;
+}

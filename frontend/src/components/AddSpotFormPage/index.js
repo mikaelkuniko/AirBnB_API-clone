@@ -49,9 +49,10 @@ const AddSpotForm = () => {
 
     // console.log("Spot object", spotObj)
     // console.log("SpotImage object", spotImageObj)
-
+    let newSpotId;
     return dispatch(spotActions.addSpot(spotObj, spotImageObj))
-        .then(() => history.push('/'))
+        .then((res)=>newSpotId = res.id)
+        .then(() => history.push(`/spots/${newSpotId}`))
 
     setAddress('')
     setCity('')

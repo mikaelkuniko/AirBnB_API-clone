@@ -26,6 +26,21 @@ module.exports = {
         url: 'https://www.yankodesign.com/images/design_news/2020/06/all-black-interior-designs-that-will-inspire-you-to-adapt-this-modern-minimal-trend/10-Black-Interior-Design-Inspiration_Vipp-Shelter_yankodesign1.jpg',
         preview: false
       },
+      {
+        spotId: 4,
+        url: 'https://theatlasedit.com/wp-content/uploads/2019/02/New-York-Film-Locations-12.jpg',
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: 'https://theatlasedit.com/wp-content/uploads/2019/02/New-York-Film-Locations-1.jpg',
+        preview: false
+      },
+      {
+        spotId: 6,
+        url: 'https://theatlasedit.com/wp-content/uploads/2022/11/image.png',
+        preview: false
+      },
     ], {});
     /**
      * Add seed commands here.

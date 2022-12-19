@@ -46,6 +46,42 @@ module.exports = {
         description: 'Good for a large gathering',
         price: 3123
       },
+      {
+        ownerId: 3,
+        address: '455 Water Street',
+        city: 'Brooklyn',
+        state: 'New York',
+        country: 'USA',
+        lat: 23.32,
+        lng: 12.45,
+        name: 'Urban Apartment',
+        description: 'Good for a small getaway',
+        price: 133
+      },
+      {
+        ownerId: 2,
+        address: '4 East 74th Street',
+        city: 'New York City',
+        state: 'New York',
+        country: 'USA',
+        lat: 33.32,
+        lng: 42.45,
+        name: 'Modern Townhouse',
+        description: 'Located in the city',
+        price: 201
+      },
+      {
+        ownerId: 1,
+        address: '455 Madison Avenue',
+        city: 'Midtown East',
+        state: 'New York',
+        country: 'USA',
+        lat: 233.32,
+        lng: 121.45,
+        name: 'Exclusive penthouse room',
+        description: 'Good for a luxurious getaway',
+        price: 3123
+      },
     ], {});
     /**
      * Add seed commands here.
@@ -62,7 +98,7 @@ module.exports = {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options,
     {
-      state: { [Op.in]: ['California'] }
+      state: { [Op.in]: ['California', 'New York'] }
     },
      {});
     /**

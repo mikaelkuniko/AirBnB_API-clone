@@ -6,18 +6,18 @@ AlphaBnB is a web application inspired by by Airbnb that primarily provides an o
 
 ### Please see below links to project Wiki:
 
-[API Documentation](https://github.com/mikaelkuniko/AirBnB_API-clone/wiki/API-Documentation)
-[Database Schema](https://github.com/mikaelkuniko/AirBnB_API-clone/wiki/Database-schema)
-[Redux Store Shape](https://github.com/mikaelkuniko/AirBnB_API-clone/wiki/Redux-Store-Shape)
-[Feature List](https://github.com/mikaelkuniko/AirBnB_API-clone/wiki/Features-List)
+- [API Documentation](https://github.com/mikaelkuniko/AirBnB_API-clone/wiki/API-Documentation)
+- [Database Schema](https://github.com/mikaelkuniko/AirBnB_API-clone/wiki/Database-schema)
+- [Redux Store Shape](https://github.com/mikaelkuniko/AirBnB_API-clone/wiki/Redux-Store-Shape)
+- [Feature List](https://github.com/mikaelkuniko/AirBnB_API-clone/wiki/Features-List)
 
 ### This project is built with:
-JavaScript
-PostgreSQL
-Sequelize
-Express
-React
-Redux
+- JavaScript
+- PostgreSQL
+- Sequelize
+- Express
+- React
+- Redux
 
 # Feature directions
 

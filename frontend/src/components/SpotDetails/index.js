@@ -43,7 +43,7 @@ const SpotDetail = () => {
     // console.log("this is state",state)
     let user = useSelector(state=>state.session.user)
     let owner = useSelector(state=> state.spots.singleSpot.Owner)
-    // console.log("This is spot owner", owner)
+    console.log("This is spot owner", owner)
     // console.log("Check user", user)
 
     // console.log('is this true', owner.id === session.user.id)
@@ -64,26 +64,30 @@ const SpotDetail = () => {
     const userLoggedIn = !!user
     // console.log('this is user log in', userLoggedIn)
     let ownedButton;
+    let reviewButton;
    if(userLoggedIn && !!owner){
     // console.log('This is user in if cond', user)
     // console.log('This is owner in if cond', owner)
     if(user.id === owner.id){
         ownedButton = <div className="owned">
             <div>
-            <button onClick={editRouteRedirect}>
+            <button className="alphabnb-button"onClick={editRouteRedirect} id='edit-button'>
                 Edit Location
             </button>
             </div>
             <div>
-                <button onClick={deleteLocation}>
+                <button className="alphabnb-button" onClick={deleteLocation} id='delete-button'>
                     Delete Location
                 </button>
             </div>
         </div>
     }
     else {
-        ownedButton= <div className='unowned'>
-            <button onClick={addReviewRedirect}>Add Review</button>
+        // ownedButton= <div className='unowned'>
+        //     <button className="alphabnb-button" onClick={addReviewRedirect}>Add Review</button>
+        // </div>
+        reviewButton= <div className='unowned'>
+            <button className="alphabnb-button" onClick={addReviewRedirect}>Add Review</button>
         </div>
     }
    } else {
@@ -100,14 +104,22 @@ const SpotDetail = () => {
     // if(!owner || !user.id) return null
 
     return(
-        <div>
-            <div>
-            <h1>{spot.name} in {spot.city}, {spot.state}</h1>
-            <p>Average Rating: {spot.avgStarRating ? spot.avgStarRating : 'New location'}</p>
-            <p>Reviews: {spot.numReviews ? spot.numReviews : 'New location'}</p>
-            <p>{spot.city}, {spot.state}, {spot.country}</p>
+        <div className='spot-details-div'>
+            <div className='title-info-div'>
+                <div className='left-info-div'>
+                    <h1>{spot.name}</h1>
+                     <p><i class="fa-sharp fa-solid fa-star"/> {spot.avgStarRating ? spot.avgStarRating : 'New location'} · 
+                     {spot.numReviews ? spot.numReviews : 'No available'} reviews
+                     · {spot.city}, {spot.state}, {spot.country}
+                     </p>
+                </div>
+                <div className='right-info-div'>
+                     {ownedButton}
+                </div>
+            {/* <p>{spot.numReviews ? spot.numReviews : 'New location'}</p>
+            <p>{spot.city}, {spot.state}, {spot.country}</p> */}
             </div>
-            <div>
+            <div className='spot-images-div'>
             {spotImages.map((image)=>(
                 // console.log(image.url)
                 <div key={image.id}>
@@ -115,11 +127,19 @@ const SpotDetail = () => {
                 </div>
             ))}
             </div>
-            <div>
+            <div className='info-price-div'>
+            <div className='host-info'>
+                <h3>Entire location hosted by {owner.firstName} {owner.lastName}</h3>
                 <p>{spot.description}</p>
-                <p>${spot.price} per night</p>
             </div>
-            <div>
+            <div className='price-info'>
+                <p>${spot.price} per night</p>
+                <p><i class="fa-sharp fa-solid fa-star"/> {spot.avgStarRating ? spot.avgStarRating : 'New location'} ·
+            {spot.numReviews ? spot.numReviews : 'No available'} reviews</p>
+            </div>
+            </div>
+            <div className='reviews-div'>
+            <div className='review-cards-div'>
                 <h3>{reviewsArr.length ? `${reviewsArr.length} Reviews` : 'No reviews available'}</h3>
                 <ul>
                 {reviewsArr.map((review)=>(
@@ -128,7 +148,9 @@ const SpotDetail = () => {
                 ))}
                 </ul>
             </div>
-            {ownedButton}
+            {/* {ownedButton} */}
+            {reviewButton}
+            </div>
             {/* {(user.id === owner.id) && <div className="owned">
             <div>
                 <button onClick={editRouteRedirect}>Edit Location</button>

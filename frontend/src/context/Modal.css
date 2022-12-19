@@ -21,4 +21,6 @@
   #modal-content {
     position: absolute;
     background-color:white;
+    border-radius: 14px;
+    font-family: 'Circular','BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif;
   }

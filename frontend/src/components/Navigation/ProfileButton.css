@@ -7,13 +7,16 @@
     flex-direction: column;
     justify-content: space-between;
 
+    height: fit-content;
+    width: 140px;
+
     border-radius: 5%;
     list-style: none;
     position:absolute;
-    top: 25px;
+    top: 33px;
     right: 0px;
     background-color: white;
-    box-shadow: 1px 1px 0px 0px rgba(118,118,118,0.2);
+    box-shadow: 3px 2px 12px 3px rgba(118,118,118,0.2);
 }
 
 .profile-button-container{
@@ -45,13 +48,16 @@
 
 .log-in-sign-up{
     text-align: center;
-    width:65px;
+    width:inherit;
+    height: inherit;
     font-family: 'Circular','BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif;
+    font-size: 14px;
     transition-property: all;
 }
 
 #sign-up-modal{
     font-family: inherit;
+    padding: 10px;
     transition-property: all;
 }
 
@@ -61,11 +67,17 @@
 
 #log-in-modal{
     font-family: inherit;
+    padding: 10px;
     transition-property: all;
 }
 
 #log-in-modal:hover{
     background-color: rgba(118,118,118,0.2);
+}
+
+.profile-info-actions{
+    display: flex;
+    flex-direction: column;
 }
 
 

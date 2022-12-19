@@ -50,7 +50,7 @@ function ProfileButton({ user }) {
       <div className={ulClassName} ref={ulRef}>
         {user ? (
 
-          <div>
+          <div className="profile-info-actions">
             <p>{user.username}</p>
             <p>{user.firstName} {user.lastName}</p>
             <p>{user.email}</p>

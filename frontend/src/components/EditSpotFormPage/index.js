@@ -162,7 +162,7 @@ const handleSubmit = (e) => {
         <label>
           Price
           <input
-            type="text"
+            type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
@@ -197,7 +197,7 @@ const handleSubmit = (e) => {
         Preview Image
       </label>
         <button type="submit">Add location</button> */}
-        <button type="submit">Edit Location</button>
+        <button type="submit" disabled={!!errors.length} className='alphabnb-button'>Edit Location</button>
       </form>
     </>
       );

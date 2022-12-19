@@ -9,6 +9,8 @@
     flex-wrap: wrap;
     /* margin: auto; */
     padding: 10px;
+    font-family: 'Circular','BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif;
+    font-size: 14px;
     /* display: grid; */
     /* grid-auto-flow: row dense; */
 }

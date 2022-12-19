@@ -90,7 +90,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="alphabnb-button">Sign Up</button>
       </form>
     </>
   );

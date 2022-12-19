@@ -3,6 +3,54 @@
 }
 
 .spot-details-image{
-    height: 500px;
-    width: 500px;
+    /* height: 500px;
+    width: 850px; */
+    height: 70%;
+    width: 88%;
+    border-radius: 7px;
+}
+
+.title-info-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.spot-details-div{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding-left: 200px;
+    padding-right: 200px;
+    font-family: 'Circular','BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif;
+}
+
+.info-price-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 110px;
+    border-bottom: 1px solid rgba(118,118,118,0.8);
+
+}
+
+.owned{
+    display:flex;
+    flex-direction: row;
+}
+
+.right-info-div{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 110px;
+}
+
+#edit-button{
+margin-left: 10px;
+margin-right: 10px;
+}
+
+#delete-button{
+
 }

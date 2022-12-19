@@ -42,34 +42,43 @@ const demoLogIn = (e) => {
 
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="log-in-form-div">
+      <h3 className="login-text">Log In</h3>
+      <form onSubmit={handleSubmit} className='login-form'>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
+        <div className="login-inputs">
+          <h3>Welcome to Alphabnb</h3>
         <label>
-          Username or Email
+          {/* Username or Email */}
           <input
             type="text"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
+            placeholder="Username or Email"
+            id='username-input'
           />
         </label>
         <label>
-          Password
+          {/* Password */}
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="Password"
+            id="password-input"
           />
         </label>
-        <button type="submit" className='log-in-button'>Log In</button>
-        <button onClick={demoLogIn}>Demo</button>
+        </div>
+        <button type="submit" className='alphabnb-button' id='log-in-button'>Log In</button>
+        <button onClick={demoLogIn} className='alphabnb-button' id='demo-login'>Demo Log In</button>
       </form>
+      </div>
     </>
   );
 }

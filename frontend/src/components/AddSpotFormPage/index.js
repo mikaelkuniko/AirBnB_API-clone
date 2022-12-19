@@ -66,6 +66,7 @@ const AddSpotForm = () => {
 }
     return (
         <>
+        <div>
         <h1>Add Location</h1>
         <form onSubmit={handleSubmit}>
         {!!errors.length && (
@@ -141,7 +142,7 @@ const AddSpotForm = () => {
         <label>
           Price per night
           <input
-            type="text"
+            type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
@@ -151,7 +152,7 @@ const AddSpotForm = () => {
         <label>
           Image URL
           <input
-            type="text"
+            type="url"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
             placeholder='Image URL'
@@ -177,8 +178,9 @@ const AddSpotForm = () => {
         />
         Preview Image
       </label>
-        <button type="submit">Add location</button>
+        <button type="submit" className='alphabnb-button' disabled={!!errors.length}>Add location</button>
       </form>
+      </div>
     </>
       );
 }

@@ -55,10 +55,10 @@ function ProfileButton({ user }) {
             <p>{user.firstName} {user.lastName}</p>
             <p>{user.email}</p>
             {/* <li> */}
-              <NavLink to='/user/reviews'>Reviews</NavLink>
+              <NavLink to='/user/reviews' id='reviews-link'>Reviews</NavLink>
             {/* </li> */}
             {/* <li> */}
-              <button onClick={logout}>Log Out</button>
+              <button onClick={logout} className='alphabnb-button' id='logout-button'>Log Out</button>
             {/* </li> */}
             </div>
 

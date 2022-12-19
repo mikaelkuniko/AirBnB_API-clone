@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { useModal } from '../../context/Modal';
 import * as reviewActions from '../../store/reviews'
 import { useHistory, useParams } from 'react-router-dom';
-
+import './AddReviewForm.css'
 
 const AddReviewForm = () => {
     const dispatch = useDispatch()
@@ -62,37 +62,45 @@ const AddReviewForm = () => {
     //     .then(() => history.push(`/spots/${spotId}`))
     return (
         <>
-      <h1>Add Review</h1>
-      <form onSubmit={handleSubmit}>
-        {!!reviewExists ? <h2>You have already reviewed this location</h2> : ''}
+      <div className='outer-div'>
+      <div className='add-review-div'>
+      <h3 id='add-review-text'>Add Review</h3>
+      <form onSubmit={handleSubmit} className='add-review-form'>
+        {/* {!!reviewExists ? <h2>You have already reviewed this location</h2> : ''} */}
         {/* {!!reviewExists (<h2>You have already reviewed this location</h2>)} */}
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
+          <div className='add-review-inputs'>
+            <p>Review</p>
         <label>
-          Review
-          <input
+          <textarea
             type="text"
             value={review}
             onChange={(e) => setReview(e.target.value)}
             required
             placeholder='Add a review'
+            id='review-input'
           />
         </label>
+        <p>Stars</p>
         <label>
-          Stars
           <input
             type="number"
             value={stars}
             onChange={(e) => setStars(e.target.value)}
             required
+            id='stars-input'
           />
         </label>
-        <button type="submit"
-        disabled={!!reviewExists}>Add Review</button>
+        </div>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <button type="submit" className='alphabnb-button' id='add-review-button'
+        disabled={!!errors.length}>Add Review</button>
       </form>
+      </div>
+      </div>
     </>
     )
 }

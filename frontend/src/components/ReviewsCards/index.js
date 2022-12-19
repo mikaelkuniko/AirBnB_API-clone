@@ -26,7 +26,7 @@ const ReviewCard = ({User, review, stars, Spot, id, spotId}) => {
     if(userLoggedIn){
         if(User.id === loggedUser.id){
             ownedReview = <div className='delete-review-button'>
-            <button onClick={deleteReview}>Delete Review</button>
+            <button onClick={deleteReview} className='alphabnb-button'>Delete Review</button>
         </div>
         }
         else {ownedReview = <div></div>}

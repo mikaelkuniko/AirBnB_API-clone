@@ -188,7 +188,7 @@ router.get('/', async(req, res, next)=> {
         // let avg = 5
         // console.log('This is avg', avg)
         // console.log(element.SpotImages[0].dataValues.url)
-        console.log("This is element", element)
+        // console.log("This is element", element)
         let allSpot = {
             id: element.id,
             ownerId: element.ownerId,
@@ -223,7 +223,7 @@ router.get('/', async(req, res, next)=> {
         }
         // console.log(allSpot);
         spotsArr.push(allSpot);
-        console.log("this is in the loop", spotsArr.length)
+        // console.log("this is in the loop", spotsArr.length)
         // if(element === spots[spots.length -1]){
         //     res.json({
         //         Spots: spotsArr,
@@ -231,7 +231,7 @@ router.get('/', async(req, res, next)=> {
         //     })
         // }
     })
-    console.log("Spots arr after foreach", spotsArr.length)
+    // console.log("Spots arr after foreach", spotsArr.length)
     res.json({
         Spots: spotsArr,
         ...pageSize

@@ -61,7 +61,7 @@ useEffect(()=> {
   //grab owners and spot images from res
 //   let uneditedSpot = {}
   const spot = useSelector((state)=>state.spots.singleSpot)
-  console.log('This is edit spot slice', spot)
+  // console.log('This is edit spot slice', spot)
 
 const handleSubmit = (e) => {
     e.preventDefault()

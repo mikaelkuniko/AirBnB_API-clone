@@ -15,7 +15,7 @@ const AddReviewForm = () => {
     // const [reviewExists, setReviewExists] = useState(false)
     const {spotId} = useParams()
 
-    console.log("this is spotId", spotId)
+    // console.log("this is spotId", spotId)
 
     useEffect(()=> {
         const errors = [];
@@ -36,11 +36,11 @@ const AddReviewForm = () => {
 
         const currentUser = useSelector((state)=>state.session.user)
         const reviews = useSelector((state)=>state.reviews.spot)
-        console.log('This is reviews', reviews)
-        console.log('This is currentUser', currentUser)
+        // console.log('This is reviews', reviews)
+        // console.log('This is currentUser', currentUser)
 
         const reviewsArr = Object.values(reviews)
-         console.log("this is reviewsArr", reviewsArr)
+        //  console.log("this is reviewsArr", reviewsArr)
 
     //   reviewsArr.forEach((review)=> {
     //     if(review.User.id === currentUser.id)
@@ -48,7 +48,7 @@ const AddReviewForm = () => {
     //     else return
     //   })
         const reviewExists = reviewsArr.find((review)=>review.User.id === currentUser.id)
-        console.log('this is a boolean', reviewExists)
+        // console.log('this is a boolean', reviewExists)
 
       const handleSubmit = (e) => {
         e.preventDefault()

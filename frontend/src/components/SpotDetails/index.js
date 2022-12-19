@@ -87,20 +87,21 @@ const SpotDetail = () => {
             </div>
         </div>
     }
-    if(!!reviewExists){
-        reviewButton=<></>
-        //add edit review functionality here
-    }
     else {
+        if(!!reviewExists){
+            reviewButton=<></>
+            //add edit review functionality here
+        } else {
         // ownedButton= <div className='unowned'>
         //     <button className="alphabnb-button" onClick={addReviewRedirect}>Add Review</button>
         // </div>
         reviewButton= <div className='unowned'>
             <button className="alphabnb-button" onClick={addReviewRedirect}>Add Review</button>
         </div>
+        }
     }
    } else {
-    ownedButton = <div></div>
+    ownedButton = <></>
     reviewButton = <></>
    }
 

@@ -46,6 +46,10 @@ const SpotDetail = () => {
     console.log("This is spot owner", owner)
     // console.log("Check user", user)
 
+    let reviewExists;
+    // console.log('this is a boolean', !!reviewExists)
+
+
     // console.log('is this true', owner.id === session.user.id)
 
     // const buttonShow = (session.user || owner.id === session.user.id ? "" : " hidden");
@@ -65,7 +69,8 @@ const SpotDetail = () => {
     // console.log('this is user log in', userLoggedIn)
     let ownedButton;
     let reviewButton;
-   if(userLoggedIn && !!owner){
+   if(userLoggedIn && !!owner && !!reviews && !!user){
+    reviewExists = reviewsArr.find((review)=>review.User.id === user.id)
     // console.log('This is user in if cond', user)
     // console.log('This is owner in if cond', owner)
     if(user.id === owner.id){
@@ -82,6 +87,10 @@ const SpotDetail = () => {
             </div>
         </div>
     }
+    if(!!reviewExists){
+        reviewButton=<></>
+        //add edit review functionality here
+    }
     else {
         // ownedButton= <div className='unowned'>
         //     <button className="alphabnb-button" onClick={addReviewRedirect}>Add Review</button>
@@ -92,6 +101,7 @@ const SpotDetail = () => {
     }
    } else {
     ownedButton = <div></div>
+    reviewButton = <></>
    }
 
 
@@ -108,7 +118,7 @@ const SpotDetail = () => {
             <div className='title-info-div'>
                 <div className='left-info-div'>
                     <h1>{spot.name}</h1>
-                     <p><i class="fa-sharp fa-solid fa-star"/> {spot.avgStarRating ? spot.avgStarRating : 'New location'} · 
+                     <p><i class="fa-sharp fa-solid fa-star"/> {spot.avgStarRating ? spot.avgStarRating : 'New location'} ·
                      {spot.numReviews ? spot.numReviews : 'No available'} reviews
                      · {spot.city}, {spot.state}, {spot.country}
                      </p>

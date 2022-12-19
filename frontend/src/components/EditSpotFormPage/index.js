@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { useModal } from '../../context/Modal';
 import * as spotActions from '../../store/spots';
 import { useHistory, useParams } from 'react-router-dom';
+import './EditSpotForm.css'
 
 const EditSpotForm = () => {
 
@@ -93,79 +94,79 @@ const handleSubmit = (e) => {
 }
     return (
         <>
-        <h1>Edit Location</h1>
-        <form onSubmit={handleSubmit}>
-        {!!errors.length && (
-        <div>
-          The following errors were found:
-          <ul className='errors'>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+        <div className='outer-div'>
+          <div className='edit-spot-div'>
+        <h3 id='edit-location-text'>Edit Location</h3>
+        <form onSubmit={handleSubmit} className='edit-location-form'>
+          <div className='edit-location-inputs'>
+            <p>Address</p>
         <label>
-            Address
           <input
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
+            className='input'
           />
         </label>
+        <p>City</p>
         <label>
-            City
           <input
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
+            className='input'
           />
         </label>
+        <p>State</p>
         <label>
-          State
           <input
             type="text"
             value={state}
             onChange={(e) => setState(e.target.value)}
             required
+            className='input'
           />
         </label>
+        <p>Country</p>
         <label>
-          Country
           <input
             type="text"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required
+            className='input'
           />
         </label>
+        <p>Name</p>
         <label>
-          Name
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            className='input'
           />
         </label>
+        <p>Description</p>
         <label>
-          Description
           <textarea
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
+            className='input'
           />
         </label>
+        <p>Price per night</p>
         <label>
-          Price
           <input
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
+            className='input'
           />
         </label>
         {/* <label>
@@ -197,8 +198,21 @@ const handleSubmit = (e) => {
         Preview Image
       </label>
         <button type="submit">Add location</button> */}
-        <button type="submit" disabled={!!errors.length} className='alphabnb-button'>Edit Location</button>
+        </div>
+        {!!errors.length && (
+        <div>
+          The following errors were found:
+          <ul className='errors'>
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+        <button id='edit-location-button' type="submit" disabled={!!errors.length} className='alphabnb-button'>Edit Location</button>
       </form>
+      </div>
+      </div>
     </>
       );
 }

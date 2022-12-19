@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux";
 import { useModal } from '../../context/Modal';
 import * as spotActions from '../../store/spots';
 import { useHistory } from 'react-router-dom';
+import './AddSpotForm.css'
 
 const AddSpotForm = () => {
   const dispatch = useDispatch();
@@ -66,98 +67,100 @@ const AddSpotForm = () => {
 }
     return (
         <>
-        <div>
-        <h1>Add Location</h1>
-        <form onSubmit={handleSubmit}>
-        {!!errors.length && (
-        <div>
-          The following errors were found:
-          <ul className='errors'>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+        <div className='outer-div'>
+          <div className='add-spot-div'>
+        <h3 id='add-location-text'>Add Location</h3>
+        <form onSubmit={handleSubmit} className='add-location-form'>
+          <div className='add-location-inputs'>
+            <p>Address</p>
         <label>
-          Address
           <input
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
             placeholder='Address'
+            className='input'
           />
         </label>
+        <p>City</p>
         <label>
-          City
           <input
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
             placeholder='City'
+            className='input'
           />
         </label>
+        <p>State</p>
         <label>
-          State
           <input
             type="text"
             value={state}
             onChange={(e) => setState(e.target.value)}
             required
             placeholder='State'
+            className='input'
           />
         </label>
+        <p>Country</p>
         <label>
-          Country
           <input
             type="text"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required
             placeholder='Country'
+            className='input'
           />
         </label>
+        <p>Name</p>
         <label>
-          Name
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
             placeholder='Name'
+            className='input'
           />
         </label>
+        <p>Description</p>
         <label>
-          Description
           <textarea
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
             placeholder='Description'
+            className='input'
           />
         </label>
+        <p>Price per night</p>
         <label>
-          Price per night
           <input
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
             placeholder='Price per night'
+            className='input'
           />
         </label>
+        <p>Image URL</p>
         <label>
-          Image URL
           <input
             type="url"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
             placeholder='Image URL'
+            className='input'
           />
         </label>
+        <p>Select to preview image</p>
+        <div className='radio-buttons'>
         <label>
         <input
           type="radio"
@@ -178,8 +181,21 @@ const AddSpotForm = () => {
         />
         Preview Image
       </label>
-        <button type="submit" className='alphabnb-button' disabled={!!errors.length}>Add location</button>
+      </div>
+      </div>
+      {!!errors.length && (
+        <div>
+          The following errors were found:
+          <ul className='errors'>
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+        <button id='add-location-button' type="submit" className='alphabnb-button' disabled={!!errors.length}>Add location</button>
       </form>
+      </div>
       </div>
     </>
       );

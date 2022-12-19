@@ -55,6 +55,7 @@
     transition-property: all;
 }
 
+
 #sign-up-modal{
     font-family: inherit;
     padding: 10px;
@@ -78,6 +79,27 @@
 .profile-info-actions{
     display: flex;
     flex-direction: column;
+    text-align: center;
+    width:inherit;
+    height: inherit;
+    font-family: 'Circular','BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif;
+    font-size: 14px;
+    transition-property: all;
+}
+
+#reviews-link{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    transition-property: all;
+}
+
+#reviews-link:hover{
+    background-color: rgba(118,118,118,0.2);
+}
+
+#logout-button{
+    margin-top: 5px;
+    height: 25px;
 }
 
 

@@ -45,14 +45,10 @@ const demoLogIn = (e) => {
     <div className="log-in-form-div">
       <h3 className="login-text">Log In</h3>
       <form onSubmit={handleSubmit} className='login-form'>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
         <div className="login-inputs">
           <h3>Welcome to Alphabnb</h3>
-        <label>
+        <label className="placeholder"
+            data-placeholder="Username or Email">
           {/* Username or Email */}
           <input
             type="text"
@@ -63,7 +59,9 @@ const demoLogIn = (e) => {
             id='username-input'
           />
         </label>
-        <label>
+        <label
+          className="placeholder"
+          data-placeholder="Password">
           {/* Password */}
           <input
             type="password"
@@ -75,6 +73,11 @@ const demoLogIn = (e) => {
           />
         </label>
         </div>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
         <button type="submit" className='alphabnb-button' id='log-in-button'>Log In</button>
         <button onClick={demoLogIn} className='alphabnb-button' id='demo-login'>Demo Log In</button>
       </form>

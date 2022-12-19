@@ -9,8 +9,14 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
   const history = useHistory()
 
+  console.log("This is session user", sessionUser)
+
   const newSpotRouteRedirect = () => {
     history.push(`/spots/new`)
+}
+
+let checkUser = () => {
+  alert("Please sign up or log in to add location.")
 }
 
   return (
@@ -23,7 +29,8 @@ function Navigation({ isLoaded }){
           {/* <button onClick={newSpotRouteRedirect} className="add-location">
                     Add Location
                 </button> */}
-          <NavLink to="/spots/new" id="add-spot-link">Alphabnb your home</NavLink>
+          {(!sessionUser) ? <span id="add-spot-link" onClick={checkUser}>Alphabnb your home</span> : <NavLink to="/spots/new" id="add-spot-link" >Alphabnb your home</NavLink>}
+          {/* <NavLink to="/spots/new" id="add-spot-link" >Alphabnb your home</NavLink> */}
           <ProfileButton user={sessionUser}/>
         </div>
       )}

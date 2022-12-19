@@ -13,7 +13,7 @@ const SpotsList = () => {
     const history = useHistory()
     // console.log('State obj', useSelector(state=>state))
     const user = useSelector(state=>state.session)
-    console.log("Check user", user.user)
+    // console.log("Check user", user.user)
     // console.log("If checkuser is null should be false", !checkUser)
     // console.log("this is spots", spots);
     const buttonShow = (user.user ? "" : " hidden");

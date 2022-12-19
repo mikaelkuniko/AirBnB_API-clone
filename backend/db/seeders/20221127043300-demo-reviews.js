@@ -22,12 +22,12 @@ module.exports = {
         review: 'Fantastic place',
         stars: 5
       },
-      {
-        spotId: 3,
-        userId: 1,
-        review: 'Amazing place',
-        stars: 5
-      },
+      // {
+      //   spotId: 3,
+      //   userId: 1,
+      //   review: 'Amazing place',
+      //   stars: 5
+      // },
     ], {});
     /**
      * Add seed commands here.

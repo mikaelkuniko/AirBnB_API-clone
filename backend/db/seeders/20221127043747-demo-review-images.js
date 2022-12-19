@@ -19,10 +19,10 @@ module.exports = {
         reviewId: 2,
         url: 'silverstar.png'
       },
-      {
-        reviewId: 3,
-        url: 'goldstar.png'
-      },
+      // {
+      //   reviewId: 3,
+      //   url: 'goldstar.png'
+      // },
     ], {});
     /**
      * Add seed commands here.

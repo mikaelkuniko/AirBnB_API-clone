@@ -9,8 +9,8 @@ const ReviewCard = ({User, review, stars, Spot, id, spotId}) => {
     const history = useHistory();
     let reviewId = id
     // console.log('this is the reviewId',reviewId)
-    console.log("This is reviewed user id", User)
-    console.log("this is spotId", spotId)
+    // console.log("This is reviewed user id", User)
+    // console.log("this is spotId", spotId)
 
     const deleteReview = () => {
         dispatch(removeReview(reviewId));
@@ -19,7 +19,7 @@ const ReviewCard = ({User, review, stars, Spot, id, spotId}) => {
     }
 
     let loggedUser = useSelector(state=>state.session.user)
-    console.log('this is current logged in user', loggedUser)
+    // console.log('this is current logged in user', loggedUser)
 
     const userLoggedIn = !!loggedUser
     let ownedReview;

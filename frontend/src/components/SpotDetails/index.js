@@ -43,7 +43,7 @@ const SpotDetail = () => {
     // console.log("this is state",state)
     let user = useSelector(state=>state.session.user)
     let owner = useSelector(state=> state.spots.singleSpot.Owner)
-    console.log("This is spot owner", owner)
+    // console.log("This is spot owner", owner)
     // console.log("Check user", user)
 
     let reviewExists;

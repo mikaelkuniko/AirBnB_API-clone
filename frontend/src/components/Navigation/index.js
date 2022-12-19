@@ -9,7 +9,7 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
   const history = useHistory()
 
-  console.log("This is session user", sessionUser)
+  // console.log("This is session user", sessionUser)
 
   const newSpotRouteRedirect = () => {
     history.push(`/spots/new`)

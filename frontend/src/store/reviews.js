@@ -70,6 +70,7 @@ export const getAllUserReviews = () => async dispatch => {
           if(response.ok){
             const newReview = await response.json();
             dispatch(add(newReview))
+            // console.log("This is new review", newReview)
             return newReview
           }
     }
@@ -135,6 +136,7 @@ const reviewsReducer = (state = initialState, action) => {
             newState.user = newUser
             newState.spot = newSpot
             return newState
+        // create add/edit thunk
         default:
             return state;
     }
